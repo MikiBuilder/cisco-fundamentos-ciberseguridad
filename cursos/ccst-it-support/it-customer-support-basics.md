@@ -1,13 +1,14 @@
-# 📘 Manual de Estudio — IT Customer Support Basics
+[← Volver a la página principal del repositorio](../../README.md)
 
+# IT Customer Support Basics
 
 > **Objetivo del curso:** desarrollar las competencias de help desk y atención al cliente necesarias para trabajar en puestos de soporte TI de nivel inicial, aprendiendo a gestionar y resolver incidencias en entornos de TI.
 
 ---
 
-## 📑 Índice
+## Índice
 
-- [Cómo usar este manual](#-cómo-usar-este-manual)
+- [Cómo usar este manual](#cómo-usar-este-manual)
 - [0. Introducción al curso](#0-introducción-al-curso)
 - [Módulo 1 — Customer Service in IT Support](#módulo-1--customer-service-in-it-support)
   - [1.1 Help Desk Concepts](#11-help-desk-concepts-conceptos-de-help-desk)
@@ -20,18 +21,18 @@
   - [2.3 Researching with AI and Troubleshooting Tools](#23-researching-with-ai-and-troubleshooting-tools-investigación-con-ia)
   - [2.4 Common Application Issues](#24-common-application-issues-problemas-comunes-de-aplicaciones)
   - [2.5 Resumen del Módulo 2](#25-resumen-del-módulo-2)
-- [Examen final del curso](#-examen-final-del-curso)
-- [Mapeo con la certificación CCST IT Support](#-mapeo-con-la-certificación-ccst-it-support)
-- [Glosario de términos](#-glosario-de-términos)
+- [Examen final del curso](#examen-final-del-curso)
+- [Mapeo con la certificación CCST IT Support](#mapeo-con-la-certificación-ccst-it-support)
+- [Glosario de términos](#glosario-de-términos)
 
 ---
 
-## 🧭 Cómo usar este manual
+## Cómo usar este manual
 
 1. Antes de cada sesión, lee el resumen del apartado correspondiente.
 2. Después de cada sesión, repasa las palabras clave. En el examen CCST aparecen normalmente en inglés.
-3. Las cajas 💡 "Para el examen" recogen los datos que más se preguntan.
-4. La semana previa al examen, repasa el [glosario](#-glosario-de-términos) completo y recita de memoria los 8 pasos del troubleshooting.
+3. Los apartados "Para el examen" recogen los datos que más se preguntan.
+4. La semana previa al examen, repasa el [glosario](#glosario-de-términos) completo y recita de memoria los 8 pasos del troubleshooting.
 
 ---
 
@@ -43,9 +44,9 @@ El técnico de help desk es el primer punto de contacto entre el usuario y el de
 
 El curso se organiza en dos módulos: atención al cliente (Módulo 1) y resolución técnica de problemas, incluido el soporte remoto (Módulo 2).
 
-**🔑 Palabras clave:** *entry-level IT support · help desk · career path · soft skills · technical skills*
+**Palabras clave:** *entry-level IT support · help desk · career path · soft skills · technical skills*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -111,14 +112,14 @@ Para manejar varios tickets a la vez sin perder calidad hace falta priorizar de 
 
 La IA asiste al help desk en tareas concretas: clasificación automática de tickets (triage), sugerencia de artículos de la base de conocimiento, redacción asistida de respuestas y detección de patrones de incidencias repetidas.
 
-### 💡 Para el examen
+### Para el examen
 - Distingue **incidente** (algo que funcionaba deja de funcionar) de **solicitud de servicio** (petición de algo nuevo: acceso, instalación, información).
 - Memoriza el ciclo de vida del ticket y los criterios de escalado.
 - Prioridad = impacto × urgencia.
 
-**🔑 Palabras clave:** *ticket · ticketing system · workflow · queue · SLA · escalation · tier 1/2/3 · incident · service request · prioritization · impact · urgency · knowledge base · AI triage · CSAT · FCR*
+**Palabras clave:** *ticket · ticketing system · workflow · queue · SLA · escalation · tier 1/2/3 · incident · service request · prioritization · impact · urgency · knowledge base · AI triage · CSAT · FCR*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -165,14 +166,14 @@ Redirigir con cortesía las conversaciones que se desvían del problema, sin res
 | **Experto / sabelotodo (knowledgeable)** | Respetar sus conocimientos; no ser condescendiente; nivel técnico de tú a tú |
 | **Inexperto (inexperienced)** | Lenguaje sencillo sin jerga; instrucciones paso a paso; paciencia |
 
-### 💡 Para el examen
+### Para el examen
 - Nunca discutir, culpar al usuario ni usar jerga técnica con usuarios inexpertos.
 - Secuencia ante cliente enfadado: escuchar → empatizar → disculparse → resolver.
 - En preguntas sobre escucha activa, la respuesta correcta suele ser parafrasear o resumir.
 
-**🔑 Palabras clave:** *active listening · paraphrasing · summarizing · open-ended questions · closed-ended questions · empathy · rapport · hold · warm transfer · call focus · difficult customers · professionalism · netiquette*
+**Palabras clave:** *active listening · paraphrasing · summarizing · open-ended questions · closed-ended questions · empathy · rapport · hold · warm transfer · call focus · difficult customers · professionalism · netiquette*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -195,12 +196,12 @@ Cada interacción debe quedar registrada en el ticket con lenguaje claro y objet
 
 **Buenas prácticas:** escribir durante la atención o inmediatamente después · hechos, no opiniones · sin abreviaturas ambiguas · respetar la privacidad de los datos del usuario.
 
-### 💡 Para el examen
+### Para el examen
 - Se documenta en cada fase del proceso. Las preguntas suelen dar por incorrecta la opción de documentar únicamente al cerrar el ticket.
 
-**🔑 Palabras clave:** *documentation · ticket notes · knowledge base article · case history · follow-up · closure · data privacy*
+**Palabras clave:** *documentation · ticket notes · knowledge base article · case history · follow-up · closure · data privacy*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -212,7 +213,7 @@ El módulo trabaja tres competencias:
 2. **Comunicación profesional:** escucha activa, empatía, manejo de los 5 tipos de clientes difíciles.
 3. **Documentación:** registro completo de cada interacción y resolución.
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -241,15 +242,15 @@ Memoriza los 8 pasos en orden. Es de lo más preguntado en el examen.
 
 **Escenario práctico del curso:** aplicación del método completo a un problema de conexión Wi-Fi.
 
-### 💡 Para el examen
+### Para el examen
 - Pregunta típica: «El técnico acaba de aplicar la solución, ¿cuál es el siguiente paso?» → Observar los resultados (paso 6).
 - El paso 7 convierte el método en un ciclo: si la solución falla, se repite el proceso desde la siguiente hipótesis.
 - Cambiar una sola variable a la vez al probar soluciones.
 - La documentación (paso 8) es un paso formal del proceso, con el mismo rango que los demás.
 
-**🔑 Palabras clave:** *troubleshooting process · define the problem · gather information · probable cause · hypothesis · plan of action · implement · observe results · repeat the process · document · rollback · escalate · one change at a time · root cause*
+**Palabras clave:** *troubleshooting process · define the problem · gather information · probable cause · hypothesis · plan of action · implement · observe results · repeat the process · document · rollback · escalate · one change at a time · root cause*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -280,14 +281,14 @@ Antes de conectar: obtener el consentimiento explícito del usuario → verifica
 - Respetar la privacidad: no abrir archivos personales del usuario.
 - Documentar todo lo realizado durante la sesión.
 
-### 💡 Para el examen
+### Para el examen
 - RDP = puerto TCP 3389. Dato que cae con frecuencia.
 - El consentimiento del usuario va siempre antes de tomar el control remoto.
 - Elegir herramienta según escenario: servidor desatendido → RDP; usuario que necesita ver lo que haces → Remote Assistance.
 
-**🔑 Palabras clave:** *remote access · RDP (port 3389) · Remote Assistance · Quick Assist · VNC · screen sharing · unattended access · user consent · session security · encryption*
+**Palabras clave:** *remote access · RDP (port 3389) · Remote Assistance · Quick Assist · VNC · screen sharing · unattended access · user consent · session security · encryption*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -317,13 +318,13 @@ Para redactar prompts eficaces:
 
 Buscar antes de preguntar · describir bien el problema con contexto · compartir la solución encontrada para ayudar a otros.
 
-### 💡 Para el examen
+### Para el examen
 - Orden de investigación: KB interna → documentación oficial → búsqueda/foros/IA.
 - Las soluciones nuevas y útiles deberían acabar como artículo de la KB.
 
-**🔑 Palabras clave:** *AI prompting · generative AI · hallucination · knowledge base · search engine · technical forums · vendor documentation · verify sources*
+**Palabras clave:** *AI prompting · generative AI · hallucination · knowledge base · search engine · technical forums · vendor documentation · verify sources*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -354,13 +355,13 @@ Causas más frecuentes, en el orden en que deben comprobarse:
 
 **Escenario práctico del curso:** resolver un problema en una app de mensajería aplicando los 8 pasos del apartado [2.1](#21-the-troubleshooting-process-el-proceso-de-troubleshooting-los-8-pasos).
 
-### 💡 Para el examen
+### Para el examen
 - Ante un fallo de instalación, lo primero: requisitos del sistema y permisos.
 - IMAP mantiene el correo en el servidor; POP3 lo descarga. Distinción clásica de examen.
 
-**🔑 Palabras clave:** *system requirements · administrator privileges · installation error · compatibility · dependencies · email client · SMTP · IMAP · POP3 · synchronization · collaboration apps*
+**Palabras clave:** *system requirements · administrator privileges · installation error · compatibility · dependencies · email client · SMTP · IMAP · POP3 · synchronization · collaboration apps*
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
@@ -373,11 +374,11 @@ El módulo cubre cuatro bloques:
 3. Investigación con criterio: KB → documentación oficial → búsqueda/IA, verificando las fuentes.
 4. Fallos de aplicación habituales: instalación, email y apps de colaboración.
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
-# 🏁 Examen final del curso
+# Examen final del curso
 
 El curso cierra con el **IT Customer Support Basics Final Exam** (y una encuesta de satisfacción que no puntúa). Repasa especialmente:
 
@@ -388,11 +389,11 @@ El curso cierra con el **IT Customer Support Basics Final Exam** (y una encuesta
 5. Buenas prácticas de documentación e investigación con IA.
 6. Puertos: RDP 3389 · SMTP 25/587 · IMAP 143/993 · POP3 110/995.
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
-# 🎯 Mapeo con la certificación CCST IT Support
+# Mapeo con la certificación CCST IT Support
 
 | Dominio CCST IT Support | Contenido del curso relacionado |
 |---|---|
@@ -402,11 +403,11 @@ El curso cierra con el **IT Customer Support Basics Final Exam** (y una encuesta
 | Remote Support Tools | [2.2](#22-remote-access-support-soporte-mediante-acceso-remoto) |
 | Research & Documentation | [1.3](#13-customer-interaction-and-documentation-interacción-con-el-cliente-y-documentación), [2.3](#23-researching-with-ai-and-troubleshooting-tools-investigación-con-ia) |
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
-# 📖 Glosario de términos
+# Glosario de términos
 
 | Término | Definición |
 |---|---|
@@ -441,8 +442,8 @@ El curso cierra con el **IT Customer Support Basics Final Exam** (y una encuesta
 | **Warm transfer (transferencia atendida)** | Transferencia de llamada en la que el técnico presenta el caso al nuevo agente antes de retirarse, evitando que el usuario repita la información. |
 | **Workflow (flujo de trabajo)** | Secuencia estandarizada de estados por los que pasa un ticket: nuevo → asignado → en curso → resuelto → cerrado. |
 
-[⬆ Volver al índice](#-índice)
+[⬆ Volver al índice](#índice)
 
 ---
 
-*Manual de repaso del curso Cisco NetAcad «IT Customer Support Basics» y preparación del examen CCST IT Support. Material libre para compartir con la clase.*
+*Manual de repaso del curso Cisco NetAcad «IT Customer Support Basics» y preparación del examen CCST IT Support cursado desde Barcelona Activa. Material libre para compartir con la clase.*
