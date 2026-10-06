@@ -21,7 +21,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 
 | Módulo | Curso | Estado | Apuntes |
 |--------|-------|--------|---------|
-| 1 | Networking Basics | Pendiente | — |
+| 1 | Networking Basics | Pendiente | [Ver resumen](cursos/ccst-networking/networking-basics.md) |
 | 2 | Networking Devices and Initial Configuration | Pendiente | — |
 | 3 | Network Addressing and Basic Troubleshooting | Pendiente | — |
 | 4 | Network Support and Security | Pendiente | — |
