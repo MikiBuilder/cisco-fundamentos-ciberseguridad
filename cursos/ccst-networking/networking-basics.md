@@ -4,7 +4,7 @@
 
 > **Objetivo del curso:** comprender los fundamentos de las redes: dispositivos, medios y protocolos. Observar el flujo de datos en una red, configurar dispositivos para conectarse y usar aplicaciones y protocolos de red para tareas reales.
 
-**Estado de estos apuntes:** cubren los módulos 1 a 9. El curso completo tiene 17 módulos (22 horas, 13 labs); los módulos 10-17 se añadirán a medida que se cursen.
+**Estado de estos apuntes:** cubren los módulos 1 a 13. El curso completo tiene 17 módulos (22 horas, 13 labs); los módulos 14 a 17 se añadirán a medida que se cursen.
 
 ---
 
@@ -22,6 +22,11 @@
 - [Checkpoint Exam: Network Access](#checkpoint-exam-network-access)
 - [Módulo 8 — The Internet Protocol](#módulo-8--the-internet-protocol)
 - [Módulo 9 — IPv4 and Network Segmentation](#módulo-9--ipv4-and-network-segmentation)
+- [Módulo 10 — IPv6 Addressing Formats and Rules](#módulo-10--ipv6-addressing-formats-and-rules)
+- [Módulo 11 — Dynamic Addressing with DHCP](#módulo-11--dynamic-addressing-with-dhcp)
+- [Checkpoint Exam: The Internet Protocol](#checkpoint-exam-the-internet-protocol)
+- [Módulo 12 — Gateways to Other Networks](#módulo-12--gateways-to-other-networks)
+- [Módulo 13 — The ARP Process](#módulo-13--the-arp-process)
 - [Próximos módulos (pendientes de cursar)](#próximos-módulos-pendientes-de-cursar)
 - [Anexo: palabras clave por módulo](#anexo-palabras-clave-por-módulo)
 - [Glosario de términos](#glosario-de-términos)
@@ -33,7 +38,7 @@
 1. Antes de cada sesión, lee el resumen del módulo correspondiente.
 2. Después de cada sesión, repasa las palabras clave del [anexo](#anexo-palabras-clave-por-módulo). En el examen CCST Networking aparecen normalmente en inglés.
 3. Los apartados "Para el examen" recogen los datos que más se preguntan.
-4. Práctica relacionada del repositorio: [Packet Tracer y redes básicas](../../recursos/packet-tracer-redes-basicas.md) (enrutamiento entre dos subredes, directamente ligado a los módulos 8 y 9).
+4. Práctica relacionada del repositorio: [Packet Tracer y redes básicas](../../recursos/packet-tracer-redes-basicas.md) (enrutamiento entre dos subredes, ligada a los módulos 8, 9 y 12).
 
 ---
 
@@ -66,7 +71,7 @@
 - **Rendimiento (throughput):** lo que realmente se transmite, siempre igual o menor que el ancho de banda. Lo reducen la latencia, la congestión, el número de saltos y el dispositivo más lento del camino.
 
 ### Para el examen
-- Bandwidth = capacidad teórica; throughput = velocidad real medida. El throughput nunca supera el bandwidth.
+- Bandwidth es la capacidad teórica; throughput es la velocidad real medida, y nunca supera al primero.
 - El throughput de un trayecto lo limita el enlace más lento del camino.
 
 [⬆ Volver al índice](#índice)
@@ -81,7 +86,7 @@
 
 - **Host:** cualquier dispositivo que envía o recibe datos en la red.
 - **Servidor:** proporciona servicios (web, correo, archivos). **Cliente:** los solicita y consume.
-- Un mismo equipo puede ser cliente y servidor a la vez (redes **peer-to-peer, P2P**). P2P es simple y barato pero no escala: sin administración centralizada, menos seguridad y rendimiento.
+- Un mismo equipo puede ser cliente y servidor a la vez (redes **peer-to-peer, P2P**). P2P resulta simple y barato pero no escala: sin administración centralizada hay menos seguridad y peor rendimiento.
 
 ## 2.2 Network Components (Componentes de la infraestructura)
 
@@ -107,8 +112,8 @@
 | **Línea dedicada** | Empresas; caudal garantizado |
 
 ### Para el examen
-- P2P: adecuado solo para redes muy pequeñas; sus desventajas (seguridad, escalabilidad, administración) son pregunta habitual.
-- Saber emparejar cada tecnología de acceso con su escenario típico (satélite → zona rural aislada, fibra → máxima velocidad).
+- P2P es adecuado solo para redes muy pequeñas; sus desventajas (seguridad, escalabilidad, administración) son pregunta habitual.
+- Saber emparejar cada tecnología de acceso con su escenario típico: satélite para zona rural aislada, fibra para máxima velocidad.
 
 [⬆ Volver al índice](#índice)
 
@@ -121,16 +126,16 @@
 ## 3.1 Wireless Networks (Redes inalámbricas)
 
 - Usan ondas de radio en bandas con y sin licencia.
-- **Telefonía celular:** la zona se divide en celdas atendidas por antenas; generaciones **3G/4G/5G** (5G: más velocidad, menos latencia, más dispositivos por antena).
+- **Telefonía celular:** la zona se divide en celdas atendidas por antenas; generaciones **3G/4G/5G** (5G aporta más velocidad, menos latencia y más dispositivos por antena).
 - Otras tecnologías: **Wi-Fi** (LAN inalámbrica), **Bluetooth** (PAN, corto alcance, poco consumo), **GPS** (posicionamiento).
 
 ## 3.2 Mobile Device Connectivity (Conectividad de dispositivos móviles)
 
 - Los móviles alternan entre red celular y Wi-Fi: el Wi-Fi ahorra datos del plan y suele ser más rápido.
-- Configuración habitual que gestiona el soporte: activar/desactivar Wi-Fi y datos, emparejar Bluetooth, hotspot personal (tethering), modo avión, GPS/localización.
+- Configuración habitual que gestiona el soporte: activar o desactivar Wi-Fi y datos, emparejar Bluetooth, hotspot personal (tethering), modo avión, GPS y localización.
 
 ### Para el examen
-- Bluetooth = emparejamiento (pairing) y corto alcance; Wi-Fi = asociación a un SSID.
+- Bluetooth funciona por emparejamiento (pairing) y corto alcance; Wi-Fi por asociación a un SSID.
 - El tethering/hotspot convierte el móvil en punto de acceso para otros dispositivos.
 
 [⬆ Volver al índice](#índice)
@@ -143,18 +148,18 @@
 
 ## 4.1 Home Network Basics (Fundamentos)
 
-- El **router doméstico** integra varios dispositivos en uno: router + switch (puertos LAN) + punto de acceso Wi-Fi y, a menudo, firewall y servidor DHCP.
+- El **router doméstico** integra varios dispositivos en uno: router, switch (puertos LAN), punto de acceso Wi-Fi y, a menudo, firewall y servidor DHCP.
 - Puertos: WAN/Internet (hacia el ISP) y LAN (hacia los equipos de casa).
 
 ## 4.2 Network Technologies in the Home (Tecnologías del hogar)
 
-- Inalámbricas: Wi-Fi, Bluetooth y bandas de radiofrecuencia **2,4 GHz y 5 GHz**.
+- Inalámbricas: Wi-Fi, Bluetooth y bandas de radiofrecuencia de **2,4 GHz y 5 GHz**.
 - Cableadas: Ethernet (Cat 5e/6) y **powerline** (red por la instalación eléctrica, útil donde no llega el Wi-Fi ni el cable).
 
 ## 4.3 Wireless Standards (Estándares inalámbricos)
 
 - Familia **IEEE 802.11** (Wi-Fi): 802.11n (Wi-Fi 4), 802.11ac (Wi-Fi 5), 802.11ax (Wi-Fi 6).
-- 2,4 GHz: más alcance y penetración, más interferencias (microondas, Bluetooth, vecinos), canales 1-6-11 sin solape.
+- 2,4 GHz: más alcance y penetración, más interferencias (microondas, Bluetooth, vecinos); canales 1, 6 y 11 sin solape.
 - 5 GHz: más velocidad y canales, menos alcance.
 
 ## 4.4 Set Up a Home Router (Configurar el router doméstico)
@@ -180,7 +185,7 @@ Pasos y buenas prácticas:
 
 # Checkpoint Exam: Build a Small Network
 
-Primer examen parcial del curso: evalúa los módulos 1-4 (tipos de red, componentes, conexión al ISP, redes inalámbricas y configuración del router doméstico).
+Primer examen parcial del curso: evalúa los módulos 1 a 4 (tipos de red, componentes, conexión al ISP, redes inalámbricas y configuración del router doméstico).
 
 [⬆ Volver al índice](#índice)
 
@@ -213,7 +218,7 @@ Los modelos en capas dividen el proceso para entenderlo y diagnosticarlo:
 
 ### Para el examen
 - Memoriza las 7 capas OSI en orden (truco: *Please Do Not Throw Sausage Pizza Away*, de física a aplicación).
-- Saber ubicar protocolos y dispositivos en su capa: switch → capa 2, router → capa 3, IP → capa 3, TCP/UDP → capa 4, HTTP → capa 7.
+- Saber ubicar protocolos y dispositivos en su capa: switch en la 2, router e IP en la 3, TCP/UDP en la 4, HTTP en la 7.
 
 [⬆ Volver al índice](#índice)
 
@@ -235,7 +240,7 @@ Los modelos en capas dividen el proceso para entenderlo y diagnosticarlo:
 
 ### Para el examen
 - UTP: máximo 100 metros por segmento. Dato clásico.
-- Fibra = inmune a interferencias electromagnéticas; la elección para unir edificios o largas distancias.
+- Fibra: inmune a interferencias electromagnéticas; la elección para unir edificios o largas distancias.
 
 [⬆ Volver al índice](#índice)
 
@@ -247,18 +252,18 @@ Los modelos en capas dividen el proceso para entenderlo y diagnosticarlo:
 
 ## 7.1 Encapsulation and the Ethernet Frame (Encapsulación y trama Ethernet)
 
-- **Encapsulación:** cada capa envuelve los datos con su propia cabecera (como una carta dentro de un sobre). En la capa de acceso, el paquete IP se encapsula en una **trama Ethernet**.
+- **Encapsulación:** cada capa envuelve los datos con su propia cabecera, como una carta dentro de un sobre. En la capa de acceso, el paquete IP se encapsula en una **trama Ethernet**.
 - Campos clave de la trama: MAC de destino, MAC de origen, tipo, datos y FCS (control de errores).
 
 ## 7.2 The Access Layer (Hubs y switches)
 
-- **Dirección MAC:** identificador físico de 48 bits grabado en la tarjeta de red, se escribe en hexadecimal (p. ej. `3C:97:0E:12:AB:CD`). Única por dispositivo.
+- **Dirección MAC:** identificador físico de 48 bits grabado en la tarjeta de red, escrito en hexadecimal (p. ej. `3C:97:0E:12:AB:CD`). Única por dispositivo.
 - **Hub (obsoleto):** repite todo por todos los puertos; un solo dominio de colisión; ineficiente.
 - **Switch:** aprende las MACs conectadas a cada puerto y construye su **tabla de direcciones MAC**; entrega cada trama solo por el puerto del destinatario. Si la MAC de destino no está en la tabla, reenvía por todos los puertos excepto el de origen (flooding).
 
 ### Para el examen
-- El switch decide por **MAC de destino**, consultando su tabla; aprende las MACs leyendo la **MAC de origen** de las tramas que recibe.
-- Hub = 1 dominio de colisión compartido; switch = un dominio de colisión por puerto.
+- El switch decide por la **MAC de destino**, consultando su tabla; aprende las MACs leyendo la **MAC de origen** de las tramas que recibe.
+- Hub: un dominio de colisión compartido. Switch: un dominio de colisión por puerto.
 
 [⬆ Volver al índice](#índice)
 
@@ -266,7 +271,7 @@ Los modelos en capas dividen el proceso para entenderlo y diagnosticarlo:
 
 # Checkpoint Exam: Network Access
 
-Segundo examen parcial: evalúa los módulos 5-7 (protocolos y modelos OSI/TCP-IP, medios de red, encapsulación, MAC y switches).
+Segundo examen parcial: evalúa los módulos 5 a 7 (protocolos y modelos OSI/TCP-IP, medios de red, encapsulación, MAC y switches).
 
 [⬆ Volver al índice](#índice)
 
@@ -279,7 +284,7 @@ Segundo examen parcial: evalúa los módulos 5-7 (protocolos y modelos OSI/TCP-I
 ## 8.1 Purpose of an IPv4 Address (Propósito de la dirección IPv4)
 
 - Cada host necesita una dirección IP **única** en su red para comunicarse.
-- La IP es **lógica** (la asigna la red, cambia al cambiar de red); la MAC es **física** (fija del dispositivo). Analogía: IP = dirección postal; MAC = DNI.
+- La IP es **lógica** (la asigna la red y cambia al cambiar de red); la MAC es **física** (fija del dispositivo). Analogía: IP como dirección postal, MAC como DNI.
 
 ## 8.2 The IPv4 Address Structure (Estructura de IPv4)
 
@@ -312,7 +317,7 @@ Segundo examen parcial: evalúa los módulos 5-7 (protocolos y modelos OSI/TCP-I
 | Tipo | Destino | Ejemplo |
 |---|---|---|
 | **Unicast** | Un único host | Navegar a un servidor web |
-| **Broadcast** | Todos los hosts de la red local (dirección de broadcast, todos los bits de host a 1) | Petición ARP, DHCP Discover |
+| **Broadcast** | Todos los hosts de la red local (todos los bits de host a 1) | Petición ARP, DHCP Discover |
 | **Multicast** | Un grupo suscrito (rango 224.0.0.0 a 239.255.255.255) | Streaming a varios receptores, protocolos de routing |
 
 - Los routers **no reenvían broadcasts**: quedan contenidos en su red local.
@@ -324,28 +329,174 @@ Segundo examen parcial: evalúa los módulos 5-7 (protocolos y modelos OSI/TCP-I
   - `10.0.0.0/8`
   - `172.16.0.0/12` (172.16.0.0 – 172.31.255.255)
   - `192.168.0.0/16`
-- **Routing to the Internet:** las direcciones privadas salen a internet mediante **NAT** (el router traduce privada ↔ pública).
+- **Salida a internet:** las direcciones privadas salen mediante **NAT** (el router traduce privada ↔ pública).
 - **Direcciones de uso especial:**
   - **Loopback:** `127.0.0.1` (prueba de la pila TCP/IP local).
   - **Link-local / APIPA:** `169.254.0.0/16` (autoasignada si falla DHCP).
-- **Direccionamiento con clases (legacy):** clases A (1-126), B (128-191), C (192-223), con máscaras fijas /8, /16, /24. Hoy sustituido por **CIDR / direccionamiento sin clases**, que permite máscaras de cualquier longitud y aprovecha mejor el espacio.
-- La asignación global la gestionan IANA y los registros regionales (RIRs); los ISPs reparten a los clientes.
+- **Direccionamiento con clases (legacy):** clases A (1-126), B (128-191) y C (192-223), con máscaras fijas /8, /16 y /24. Hoy sustituido por **CIDR**, que permite máscaras de cualquier longitud y aprovecha mejor el espacio.
+- La asignación global la gestionan IANA y los registros regionales (RIRs); los ISPs reparten a sus clientes.
 
 ## 9.3 Network Segmentation (Segmentación de redes)
 
-- Cada broadcast lo procesan **todos** los hosts del segmento: en redes grandes, los broadcasts (ARP, DHCP…) degradan el rendimiento.
-- Un **dominio de broadcast** = todos los dispositivos que reciben los broadcasts de los demás (lo delimitan los routers).
+- Cada broadcast lo procesan **todos** los hosts del segmento: en redes grandes, los broadcasts (ARP, DHCP) degradan el rendimiento.
+- Un **dominio de broadcast** agrupa todos los dispositivos que reciben los broadcasts de los demás; lo delimitan los routers.
 - **Segmentar** la red en subredes más pequeñas (subnetting):
   - Reduce el tráfico de broadcast en cada segmento.
   - Mejora el rendimiento y la seguridad (aislar departamentos, invitados, servidores).
   - Facilita la administración y la localización de problemas.
-- La segmentación se hace por motivos de ubicación, grupo o tipo de dispositivo, y cada subred necesita el router como salida (default gateway).
+- La segmentación se hace por ubicación, grupo o tipo de dispositivo, y cada subred usa el router como salida (default gateway).
 
 ### Para el examen
 - Los tres rangos privados RFC 1918, de memoria, con sus máscaras.
-- 169.254.x.x = APIPA = el cliente no contactó con DHCP; 127.0.0.1 = loopback.
+- 169.254.x.x significa APIPA: el cliente no contactó con DHCP. 127.0.0.1 es loopback.
 - Los routers delimitan dominios de broadcast; los switches no (sin VLANs).
 - Clases legacy A/B/C: reconocerlas por el primer octeto, sabiendo que hoy se usa CIDR.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 10 — IPv6 Addressing Formats and Rules
+
+**(Formatos y reglas de direccionamiento IPv6)**
+
+## 10.1 IPv4 Issues (El problema de IPv4)
+
+- IPv4 ofrece unos 4.300 millones de direcciones; con internet, los móviles y el IoT, el espacio está **agotado**.
+- NAT y las direcciones privadas han alargado la vida de IPv4, pero son un parche: rompen la conexión extremo a extremo y complican algunos servicios.
+- **IPv6** es la solución definitiva: 128 bits, es decir, 340 sextillones de direcciones (3,4 × 10^38).
+- IPv4 e IPv6 convivirán durante años. Técnicas de coexistencia: **dual stack** (el host tiene ambas direcciones a la vez), **tunneling** (transportar IPv6 dentro de paquetes IPv4) y **translation** (NAT64, traducir entre ambos protocolos).
+
+## 10.2 IPv6 Addressing (Direccionamiento IPv6)
+
+- 128 bits escritos en **hexadecimal**: 8 grupos de 16 bits (**hextetos**) separados por dos puntos.
+
+```
+2001:0db8:0000:1111:0000:0000:0000:0200
+```
+
+- **Dos reglas para acortar la escritura:**
+  1. **Omitir los ceros a la izquierda** de cada hexteto: `0db8` → `db8`, `0200` → `200`.
+  2. **Sustituir una única secuencia de hextetos todo-cero por `::`** (solo puede usarse una vez por dirección).
+
+```
+2001:0db8:0000:1111:0000:0000:0000:0200
+→ 2001:db8:0:1111::200
+```
+
+- El prefijo (equivalente a la porción de red) se indica con /n, habitualmente **/64**: los primeros 64 bits identifican la red y los otros 64 la interfaz.
+
+### Para el examen
+- Practica la compresión y descompresión de direcciones: es pregunta segura.
+- El `::` solo puede aparecer **una vez**; si hubiera dos bloques de ceros, se comprime el más largo (o el primero si empatan).
+- IPv6 = 128 bits y hexadecimal; IPv4 = 32 bits y decimal.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 11 — Dynamic Addressing with DHCP
+
+**(Direccionamiento dinámico con DHCP)**
+
+## 11.1 Static and Dynamic Addressing (Asignación estática y dinámica)
+
+| Método | Cómo | Cuándo usarlo |
+|---|---|---|
+| **Estática** | El administrador configura a mano IP, máscara, gateway y DNS | Servidores, impresoras de red, equipos de red: dispositivos que deben tener siempre la misma IP |
+| **Dinámica (DHCP)** | El servidor DHCP asigna la configuración automáticamente, en préstamo (*lease*) por tiempo limitado | Equipos de usuario, móviles, invitados: la mayoría de los hosts |
+
+- DHCP ahorra trabajo, evita errores de tecleo y elimina IPs duplicadas; a cambio, la IP de un host puede cambiar con el tiempo.
+
+## 11.2 DHCPv4 Configuration (Funcionamiento y configuración)
+
+- La asignación sigue cuatro mensajes, la secuencia **DORA**:
+
+```
+Cliente → DISCOVER  (broadcast: ¿hay algún servidor DHCP?)
+Servidor → OFFER    (te ofrezco esta IP)
+Cliente → REQUEST   (acepto la oferta)
+Servidor → ACK      (confirmado, es tuya durante el lease)
+```
+
+- En el router doméstico se configura: rango de direcciones a repartir (ámbito o *pool*), duración del préstamo y direcciones excluidas o reservadas (para los equipos con IP fija).
+- Comandos del cliente: `ipconfig /release` (liberar la IP) e `ipconfig /renew` (pedir una nueva).
+- Si ningún servidor DHCP responde, el cliente Windows se autoasigna una APIPA (169.254.x.x).
+
+### Para el examen
+- DORA en orden: Discover, Offer, Request, Acknowledge. Los dos primeros y el broadcast inicial caen mucho.
+- Servidores e impresoras llevan IP estática (o reserva DHCP); los puestos de usuario, DHCP.
+- APIPA en un cliente = el DHCP no respondió.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# Checkpoint Exam: The Internet Protocol
+
+Tercer examen parcial: evalúa los módulos 8 a 11 (estructura IPv4, tipos de direcciones y segmentación, IPv6 y DHCP).
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 12 — Gateways to Other Networks
+
+**(Puertas de enlace a otras redes)**
+
+## 12.1 Network Boundaries (Fronteras de red)
+
+- El **router** marca la frontera de la red local: separa dominios de broadcast y comunica subredes.
+- El **default gateway** es la IP de la interfaz del router dentro de la red local. Todo tráfico hacia destinos fuera de la propia subred se envía al gateway.
+- Cada host debe tener configurado el gateway (a mano o por DHCP); sin él, solo alcanza su propia subred.
+- El router doméstico hace de gateway de todos los equipos de casa hacia internet.
+
+## 12.2 Network Address Translation (NAT)
+
+- Dentro de la red se usan direcciones **privadas** (RFC 1918); internet solo enruta direcciones **públicas**.
+- **NAT** resuelve el salto: el router sustituye la IP privada de origen por su IP pública al salir, y deshace el cambio con las respuestas que vuelven.
+- Mantiene una **tabla de traducciones** para saber a qué host interno pertenece cada conexión; al usar también los puertos (PAT, NAT con sobrecarga), muchos hosts comparten una única IP pública.
+- Es el motivo por el que toda una casa sale a internet con una sola IP pública contratada al ISP.
+
+### Para el examen
+- Sin default gateway: el host se comunica en su subred pero no sale de ella. Síntoma clásico en diagnóstico.
+- NAT traduce privada → pública a la salida; PAT (sobrecarga) permite compartir una IP pública entre muchos hosts gracias a los puertos.
+- La práctica de [Packet Tracer](../../recursos/packet-tracer-redes-basicas.md) del repositorio monta exactamente este escenario: dos subredes y su gateway.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 13 — The ARP Process
+
+**(El proceso ARP)**
+
+## 13.1 MAC and IP (MAC e IP juntas)
+
+- Para entregar una trama en la red local hacen falta **las dos direcciones**: la IP de destino (lógica, capa 3) y la MAC de destino (física, capa 2).
+- Si el destino está **en la misma red**, la trama lleva la MAC del destinatario final.
+- Si el destino está **en otra red**, la trama lleva la MAC del **default gateway** (aunque la IP de destino siga siendo la del host remoto).
+- **ARP (Address Resolution Protocol)** averigua la MAC que corresponde a una IP conocida:
+
+```
+1. El host consulta su tabla ARP (caché).
+2. Si la IP no está, envía una petición ARP en broadcast: "¿Quién tiene la IP x.x.x.x?"
+3. El propietario responde en unicast con su MAC.
+4. El solicitante guarda la pareja IP-MAC en su tabla ARP y envía la trama.
+```
+
+- Ver y gestionar la caché: `arp -a` (mostrar) y `arp -d` (vaciar). Las entradas caducan solas pasado un tiempo.
+
+## 13.2 Broadcast Containment (Contención de broadcasts)
+
+- Las peticiones ARP son broadcasts: todos los hosts del segmento las procesan, aunque no sean para ellos.
+- En un dominio de broadcast grande, el tráfico ARP y similares (DHCP) consume recursos de todos los equipos y degrada la red.
+- Los **routers no reenvían broadcasts**: segmentar la red en subredes contiene los broadcasts en segmentos pequeños, exactamente la razón de la segmentación vista en el módulo 9.
+
+### Para el examen
+- Petición ARP en **broadcast**, respuesta en **unicast**. Lo preguntan tal cual.
+- Destino en otra red: ARP resuelve la MAC del **gateway**, no la del host remoto.
+- ARP trabaja dentro de la red local; nunca cruza el router.
 
 [⬆ Volver al índice](#índice)
 
@@ -357,11 +508,6 @@ Se añadirán a este manual a medida que avance el curso:
 
 | Módulo | Título |
 |---|---|
-| 10 | IPv6 Addressing Formats and Rules |
-| 11 | Dynamic Addressing with DHCP |
-| — | Checkpoint Exam: The Internet Protocol |
-| 12 | Gateways to Other Networks |
-| 13 | The ARP Process |
 | 14 | Routing Between Networks |
 | — | Checkpoint Exam: Communication Between Networks |
 | 15 | TCP and UDP |
@@ -394,6 +540,14 @@ Se añadirán a este manual a medida que avance el curso:
 
 **Módulo 9:** *unicast · broadcast · multicast (224-239) · public vs private addresses · RFC 1918 (10/8, 172.16/12, 192.168/16) · NAT · loopback (127.0.0.1) · link-local/APIPA (169.254/16) · classful (A/B/C) vs classless (CIDR) · IANA/RIR · broadcast domain · network segmentation · subnetting*
 
+**Módulo 10:** *IPv4 exhaustion · IPv6 · 128 bits · hextet · hexadecimal · prefix /64 · omit leading zeros · double colon (::) · dual stack · tunneling · translation (NAT64)*
+
+**Módulo 11:** *static addressing · dynamic addressing · DHCP · DORA (Discover, Offer, Request, Acknowledge) · lease · scope/pool · reservation · excluded addresses · `ipconfig /release` · `ipconfig /renew` · APIPA*
+
+**Módulo 12:** *network boundary · default gateway · router interface · NAT · PAT (overload) · translation table · private to public · RFC 1918 · single public IP*
+
+**Módulo 13:** *ARP · ARP request (broadcast) · ARP reply (unicast) · ARP table/cache · `arp -a` · `arp -d` · MAC and IP pairing · gateway MAC · broadcast containment*
+
 [⬆ Volver al índice](#índice)
 
 ---
@@ -404,16 +558,25 @@ Se añadirán a este manual a medida que avance el curso:
 |---|---|
 | **Ancho de banda (bandwidth)** | Capacidad teórica máxima de un enlace, medida en bits por segundo. |
 | **APIPA / link-local** | Dirección 169.254.x.x que se autoasigna un host cuando no logra obtener IP por DHCP. |
+| **ARP** | Protocolo que averigua la MAC correspondiente a una IP conocida dentro de la red local; pregunta en broadcast y recibe respuesta en unicast. |
 | **Broadcast** | Transmisión dirigida a todos los hosts de la red local; los routers no la reenvían. |
+| **Caché ARP** | Tabla local de parejas IP-MAC aprendidas; se consulta con `arp -a` y sus entradas caducan solas. |
 | **CIDR** | Direccionamiento sin clases: la máscara se expresa como /n y puede tener cualquier longitud. |
+| **Default gateway** | IP de la interfaz del router en la red local; salida obligatoria del tráfico hacia otras redes. |
+| **DHCP** | Protocolo que asigna automáticamente IP, máscara, gateway y DNS mediante la secuencia DORA. |
 | **Dirección MAC** | Identificador físico de 48 bits de una tarjeta de red, en hexadecimal; única por dispositivo. |
 | **Dominio de broadcast** | Conjunto de dispositivos que reciben los broadcasts de los demás; lo delimitan los routers. |
 | **Dominio de colisión** | Segmento donde las transmisiones pueden chocar; los switches crean uno por puerto. |
+| **DORA** | Secuencia de mensajes DHCP: Discover, Offer, Request, Acknowledge. |
+| **Dual stack** | Técnica de coexistencia en la que un host tiene dirección IPv4 e IPv6 a la vez. |
 | **Encapsulación** | Proceso por el que cada capa añade su cabecera a los datos antes de transmitirlos. |
 | **Fibra óptica** | Medio que transmite pulsos de luz; largas distancias, gran ancho de banda, inmune a EMI. |
+| **Hexteto** | Cada uno de los 8 grupos de 16 bits de una dirección IPv6, escrito en hexadecimal. |
 | **Hub** | Dispositivo obsoleto que repite las señales por todos los puertos sin inteligencia. |
 | **IANA / RIR** | Organismos que administran y reparten el espacio de direcciones IP a nivel global y regional. |
 | **IEEE 802.11** | Familia de estándares Wi-Fi (n = Wi-Fi 4, ac = Wi-Fi 5, ax = Wi-Fi 6). |
+| **IPv6** | Versión del protocolo IP con direcciones de 128 bits en hexadecimal; sucesora de IPv4. |
+| **Lease (préstamo DHCP)** | Tiempo durante el cual el cliente puede usar la IP asignada antes de renovarla. |
 | **Loopback** | Dirección 127.0.0.1, prueba interna de la pila TCP/IP del propio equipo. |
 | **Máscara de subred** | Patrón de bits que separa la porción de red de la porción de host en una dirección IP. |
 | **Modelo OSI** | Modelo de referencia de 7 capas: física, enlace, red, transporte, sesión, presentación, aplicación. |
@@ -421,6 +584,7 @@ Se añadirán a este manual a medida que avance el curso:
 | **Multicast** | Transmisión a un grupo de hosts suscritos; rango IPv4 224.0.0.0-239.255.255.255. |
 | **NAT** | Traducción de direcciones: permite que IPs privadas salgan a internet con una IP pública. |
 | **P2P (peer-to-peer)** | Red sin servidor dedicado donde cada equipo puede ser cliente y servidor; no escala bien. |
+| **PAT (NAT con sobrecarga)** | Variante de NAT que usa los puertos para que muchos hosts compartan una sola IP pública. |
 | **Powerline** | Tecnología que transmite la red por la instalación eléctrica de la vivienda. |
 | **RFC 1918** | Documento que define los tres rangos de direcciones IPv4 privadas. |
 | **SSID** | Nombre que identifica una red inalámbrica. |
@@ -428,6 +592,7 @@ Se añadirán a este manual a medida que avance el curso:
 | **Tabla de direcciones MAC** | Tabla del switch que asocia cada MAC aprendida con el puerto donde se encuentra. |
 | **Throughput** | Caudal real de datos transmitidos; siempre menor o igual que el ancho de banda. |
 | **Trama (frame)** | Unidad de datos de capa 2; en Ethernet incluye MACs de origen y destino y FCS. |
+| **Tunneling** | Técnica de coexistencia que transporta paquetes IPv6 dentro de paquetes IPv4. |
 | **Unicast** | Transmisión de un emisor a un único destinatario. |
 | **UTP (par trenzado)** | Cable de cobre más común en LANs; categorías 5e/6/6a, máximo 100 m por tramo. |
 | **WPA2 / WPA3** | Protocolos actuales de seguridad Wi-Fi; WEP y las redes abiertas son inseguras. |
