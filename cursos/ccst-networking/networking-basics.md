@@ -4,7 +4,7 @@
 
 > **Objetivo del curso:** comprender los fundamentos de las redes: dispositivos, medios y protocolos. Observar el flujo de datos en una red, configurar dispositivos para conectarse y usar aplicaciones y protocolos de red para tareas reales.
 
-**Estado de estos apuntes:** cubren los módulos 1 a 13. El curso completo tiene 17 módulos (22 horas, 13 labs); los módulos 14 a 17 se añadirán a medida que se cursen.
+**Estado de estos apuntes:** curso completo. Cubren los 17 módulos, los 5 checkpoint exams y el examen final (22 horas, 13 labs).
 
 ---
 
@@ -27,7 +27,13 @@
 - [Checkpoint Exam: The Internet Protocol](#checkpoint-exam-the-internet-protocol)
 - [Módulo 12 — Gateways to Other Networks](#módulo-12--gateways-to-other-networks)
 - [Módulo 13 — The ARP Process](#módulo-13--the-arp-process)
-- [Próximos módulos (pendientes de cursar)](#próximos-módulos-pendientes-de-cursar)
+- [Módulo 14 — Routing Between Networks](#módulo-14--routing-between-networks)
+- [Checkpoint Exam: Communication Between Networks](#checkpoint-exam-communication-between-networks)
+- [Módulo 15 — TCP and UDP](#módulo-15--tcp-and-udp)
+- [Módulo 16 — Application Layer Services](#módulo-16--application-layer-services)
+- [Módulo 17 — Network Testing Utilities](#módulo-17--network-testing-utilities)
+- [Checkpoint Exam: Protocols for Specific Tasks](#checkpoint-exam-protocols-for-specific-tasks)
+- [Examen final del curso](#examen-final-del-curso)
 - [Anexo: palabras clave por módulo](#anexo-palabras-clave-por-módulo)
 - [Glosario de términos](#glosario-de-términos)
 
@@ -38,7 +44,7 @@
 1. Antes de cada sesión, lee el resumen del módulo correspondiente.
 2. Después de cada sesión, repasa las palabras clave del [anexo](#anexo-palabras-clave-por-módulo). En el examen CCST Networking aparecen normalmente en inglés.
 3. Los apartados "Para el examen" recogen los datos que más se preguntan.
-4. Práctica relacionada del repositorio: [Packet Tracer y redes básicas](../../recursos/packet-tracer-redes-basicas.md) (enrutamiento entre dos subredes, ligada a los módulos 8, 9 y 12).
+4. Práctica relacionada del repositorio: [Packet Tracer y redes básicas](../../recursos/packet-tracer-redes-basicas.md) (enrutamiento entre dos subredes, ligada a los módulos 8, 9, 12 y 14).
 
 ---
 
@@ -502,19 +508,183 @@ Tercer examen parcial: evalúa los módulos 8 a 11 (estructura IPv4, tipos de di
 
 ---
 
-# Próximos módulos (pendientes de cursar)
+# MÓDULO 14 — Routing Between Networks
 
-Se añadirán a este manual a medida que avance el curso:
+**(Enrutamiento entre redes)**
 
-| Módulo | Título |
+## 14.1 The Need for Routing (La necesidad del enrutamiento)
+
+- Dentro de una red, el switch basta; entre redes distintas hace falta el **router**.
+- La decisión del host emisor es simple: si el destino está en su misma subred, entrega directo; si no, envía la trama al default gateway.
+- El router recibe el paquete, consulta su tabla y lo reenvía hacia el destino, salto a salto, eligiendo el **mejor camino** cuando hay varios.
+
+## 14.2 The Routing Table (La tabla de enrutamiento)
+
+- Cada router mantiene una **tabla de enrutamiento** con las redes que conoce y por dónde alcanzarlas. Tres orígenes:
+
+| Tipo de ruta | Cómo se aprende |
 |---|---|
-| 14 | Routing Between Networks |
-| — | Checkpoint Exam: Communication Between Networks |
-| 15 | TCP and UDP |
-| 16 | Application Layer Services |
-| 17 | Network Testing Utilities |
-| — | Checkpoint Exam: Protocols for Specific Tasks |
-| — | Networking Basics Course Final Exam |
+| **Directamente conectada** | Automática: las redes de sus propias interfaces |
+| **Estática** | Configurada a mano por el administrador |
+| **Dinámica** | Aprendida de otros routers mediante protocolos de enrutamiento |
+
+- Proceso al recibir un paquete: leer la IP de destino, buscar la red en la tabla, reenviar por la interfaz indicada. Si no hay coincidencia, usa la **ruta por defecto** (0.0.0.0/0, el "gateway of last resort"); si tampoco existe, descarta el paquete.
+- Al cruzar cada router, la trama de capa 2 se reconstruye (nuevas MACs), pero las IPs de origen y destino no cambian.
+
+## 14.3 Create a LAN (Montar una LAN)
+
+- Una **LAN** es una red bajo una misma administración: desde la red de casa hasta la de una sede con cientos de equipos.
+- Montaje típico de red pequeña: router (gateway y DHCP), switch para los puestos cableados, AP para Wi-Fi, y direccionamiento privado coherente en cada subred.
+- En los labs del curso se monta con Packet Tracer una LAN con dos redes y un router entre ellas: el mismo escenario de la [práctica del repositorio](../../recursos/packet-tracer-redes-basicas.md).
+
+### Para el examen
+- Los tres tipos de ruta (conectada, estática, dinámica) y cuál usa el router si no encuentra la red de destino: la ruta por defecto.
+- En el viaje de un paquete las IPs no cambian; las MACs cambian en cada salto.
+- Switch = dentro de la red; router = entre redes.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# Checkpoint Exam: Communication Between Networks
+
+Cuarto examen parcial: evalúa los módulos 12 a 14 (default gateway, NAT, ARP y enrutamiento entre redes).
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 15 — TCP and UDP
+
+**(TCP y UDP)**
+
+## 15.1 TCP and UDP (Los dos protocolos de transporte)
+
+| | **TCP** | **UDP** |
+|---|---|---|
+| Tipo | Orientado a conexión | Sin conexión |
+| Fiabilidad | Garantiza entrega: acuses de recibo y retransmisión | "Best effort": envía y no comprueba |
+| Orden | Reordena los segmentos | No reordena |
+| Sobrecarga | Mayor (control) | Mínima (rápido) |
+| Usos típicos | Web (HTTP/HTTPS), correo, FTP | Streaming, voz IP, juegos, DNS, DHCP |
+
+- TCP abre la conexión con el **saludo de tres vías** (three-way handshake): `SYN → SYN-ACK → ACK`. El destino confirma lo recibido y el emisor retransmite lo que se pierde.
+- UDP sacrifica garantías por velocidad: en una llamada o un directo, reenviar un fragmento perdido llegaría tarde; mejor seguir.
+
+## 15.2 Port Numbers (Números de puerto)
+
+- La IP identifica al host; el **puerto** identifica a la aplicación dentro del host. Así un servidor atiende web, correo y FTP a la vez.
+- El cliente usa un puerto de origen aleatorio y el puerto de destino del servicio; la combinación IP + puerto es un **socket**.
+- Puertos **bien conocidos** (0-1023) que hay que saber:
+
+| Puerto | Protocolo | Servicio |
+|---|---|---|
+| 20/21 | TCP | FTP (datos/control) |
+| 22 | TCP | SSH |
+| 23 | TCP | Telnet (inseguro) |
+| 25 | TCP | SMTP (envío de correo) |
+| 53 | TCP/UDP | DNS |
+| 67/68 | UDP | DHCP (servidor/cliente) |
+| 80 | TCP | HTTP |
+| 110 | TCP | POP3 |
+| 143 | TCP | IMAP |
+| 443 | TCP | HTTPS |
+
+### Para el examen
+- La tabla de puertos, de memoria. Caen varios seguro, aquí y en el CCST.
+- TCP = fiable, con conexión, three-way handshake. UDP = rápido, sin conexión, para voz/vídeo/DNS/DHCP.
+- Saber clasificar una aplicación: ¿tolera pérdidas pero no retrasos? UDP. ¿Necesita todos los datos íntegros? TCP.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 16 — Application Layer Services
+
+**(Servicios de la capa de aplicación)**
+
+## 16.1 The Client-Server Relationship (Relación cliente-servidor)
+
+- El cliente pide, el servidor responde: el modelo de casi todo internet (URI/URL para localizar los recursos).
+
+## 16.2 Network Application Services (Servicios habituales)
+
+- **DNS:** traduce nombres de dominio a direcciones IP. Sin él habría que memorizar IPs; es el primer paso de casi cualquier conexión. Jerárquico y distribuido.
+- **Web:** el navegador pide páginas con **HTTP** (texto plano) o **HTTPS** (cifrado con TLS; siempre preferible).
+- **FTP:** transferencia de archivos entre cliente y servidor; usa dos conexiones (control 21, datos 20).
+- **Terminales virtuales:** administración remota por línea de comandos. **Telnet** viaja en claro (obsoleto e inseguro); **SSH** cifra la sesión y es el estándar.
+- **Correo electrónico:** tres protocolos repartidos por función:
+
+| Protocolo | Función | Detalle |
+|---|---|---|
+| **SMTP** | Enviar | Del cliente al servidor y entre servidores |
+| **POP3** | Recibir | Descarga los mensajes al equipo (y suele borrarlos del servidor) |
+| **IMAP** | Recibir | Los mensajes quedan en el servidor, sincronizados entre dispositivos |
+
+### Para el examen
+- DNS: nombre → IP. Si falla, los nombres no resuelven pero el ping a una IP funciona (síntoma clásico).
+- SSH sustituye a Telnet; HTTPS sustituye a HTTP. El motivo en ambos: cifrado.
+- SMTP envía; POP3 e IMAP reciben. La diferencia entre POP3 e IMAP (descargar vs sincronizar) es pregunta típica.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 17 — Network Testing Utilities
+
+**(Utilidades de diagnóstico de red)**
+
+## 17.1 Troubleshooting Commands (Comandos de diagnóstico)
+
+| Comando | Qué hace |
+|---|---|
+| `ipconfig` | Muestra IP, máscara y gateway del equipo (`/all` añade MAC, DNS y DHCP; `/release` y `/renew` renuevan la IP) |
+| `ping` | Comprueba conectividad con un destino (ICMP echo); mide tiempos de respuesta |
+| `tracert` | Muestra los saltos (routers) del camino hasta el destino y dónde se pierde |
+| `nslookup` | Consulta el DNS: comprueba qué IP devuelve un nombre |
+| `netstat` | Lista las conexiones activas y los puertos abiertos del equipo |
+
+En Linux/macOS los equivalentes son `ifconfig`/`ip addr`, `ping`, `traceroute`, `nslookup`/`dig` y `netstat`/`ss`.
+
+- **Secuencia de diagnóstico con ping**, de dentro hacia fuera:
+
+```
+1. ping 127.0.0.1        → ¿funciona la pila TCP/IP local?
+2. ping <IP propia>      → ¿funciona la tarjeta de red?
+3. ping <gateway>        → ¿llego al router?
+4. ping <IP externa>     → ¿salgo a internet? (ej.: 8.8.8.8)
+5. ping <nombre externo> → ¿resuelve el DNS? (ej.: cisco.com)
+```
+
+- Interpretación rápida: si el paso 4 funciona y el 5 falla, el problema es DNS. Si falla el 3, el problema está en la red local o el gateway.
+
+### Para el examen
+- La secuencia de ping escalonada y qué indica cada fallo. Es de las preguntas más repetidas del CCST.
+- `tracert` localiza en qué salto se pierde el tráfico; `nslookup` aísla problemas de DNS.
+- `ipconfig /all` es el primer comando ante "no tengo red": revela APIPA, gateway ausente o DNS mal configurado.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# Checkpoint Exam: Protocols for Specific Tasks
+
+Quinto examen parcial: evalúa los módulos 15 a 17 (TCP/UDP y puertos, servicios de aplicación y utilidades de diagnóstico).
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# Examen final del curso
+
+El **Networking Basics Course Final Exam** cubre los 17 módulos. Recomendaciones de repaso:
+
+1. Vuelve a los apartados "Para el examen" de cada módulo: concentran lo más preguntado.
+2. Repasa de memoria: rangos RFC 1918, tabla de puertos del módulo 15, DORA, capas OSI, canales 1-6-11 y la secuencia de ping del módulo 17.
+3. Rehaz mentalmente los escenarios de diagnóstico: APIPA (DHCP caído), ping a IP funciona pero el nombre no (DNS), alcanzo mi subred pero no salgo (gateway).
+4. Práctica de apoyo: [Packet Tracer y redes básicas](../../recursos/packet-tracer-redes-basicas.md).
+
+Superado este curso, el siguiente de la serie CCST Networking es **Networking Devices and Initial Configuration**.
 
 [⬆ Volver al índice](#índice)
 
@@ -548,6 +718,14 @@ Se añadirán a este manual a medida que avance el curso:
 
 **Módulo 13:** *ARP · ARP request (broadcast) · ARP reply (unicast) · ARP table/cache · `arp -a` · `arp -d` · MAC and IP pairing · gateway MAC · broadcast containment*
 
+**Módulo 14:** *routing · best path · routing table · directly connected route · static route · dynamic routing · default route (0.0.0.0/0) · gateway of last resort · hop · LAN design*
+
+**Módulo 15:** *TCP · UDP · connection-oriented · connectionless · reliability · acknowledgment · three-way handshake (SYN, SYN-ACK, ACK) · port number · well-known ports · socket · FTP 20/21 · SSH 22 · Telnet 23 · SMTP 25 · DNS 53 · DHCP 67/68 · HTTP 80 · POP3 110 · IMAP 143 · HTTPS 443*
+
+**Módulo 16:** *client-server · URI/URL · DNS · HTTP/HTTPS · TLS · FTP · virtual terminal · Telnet · SSH · email protocols · SMTP · POP3 · IMAP*
+
+**Módulo 17:** *`ipconfig` (`/all`, `/release`, `/renew`) · `ping` · ICMP · `tracert`/`traceroute` · `nslookup` · `netstat` · loopback test · escalated ping sequence · DNS troubleshooting*
+
 [⬆ Volver al índice](#índice)
 
 ---
@@ -565,16 +743,21 @@ Se añadirán a este manual a medida que avance el curso:
 | **Default gateway** | IP de la interfaz del router en la red local; salida obligatoria del tráfico hacia otras redes. |
 | **DHCP** | Protocolo que asigna automáticamente IP, máscara, gateway y DNS mediante la secuencia DORA. |
 | **Dirección MAC** | Identificador físico de 48 bits de una tarjeta de red, en hexadecimal; única por dispositivo. |
+| **DNS** | Servicio que traduce nombres de dominio a direcciones IP; usa el puerto 53. |
 | **Dominio de broadcast** | Conjunto de dispositivos que reciben los broadcasts de los demás; lo delimitan los routers. |
 | **Dominio de colisión** | Segmento donde las transmisiones pueden chocar; los switches crean uno por puerto. |
 | **DORA** | Secuencia de mensajes DHCP: Discover, Offer, Request, Acknowledge. |
 | **Dual stack** | Técnica de coexistencia en la que un host tiene dirección IPv4 e IPv6 a la vez. |
 | **Encapsulación** | Proceso por el que cada capa añade su cabecera a los datos antes de transmitirlos. |
 | **Fibra óptica** | Medio que transmite pulsos de luz; largas distancias, gran ancho de banda, inmune a EMI. |
+| **FTP** | Protocolo de transferencia de archivos; usa los puertos 21 (control) y 20 (datos). |
 | **Hexteto** | Cada uno de los 8 grupos de 16 bits de una dirección IPv6, escrito en hexadecimal. |
+| **HTTP / HTTPS** | Protocolos de la web (puertos 80 y 443); HTTPS añade cifrado TLS. |
 | **Hub** | Dispositivo obsoleto que repite las señales por todos los puertos sin inteligencia. |
 | **IANA / RIR** | Organismos que administran y reparten el espacio de direcciones IP a nivel global y regional. |
 | **IEEE 802.11** | Familia de estándares Wi-Fi (n = Wi-Fi 4, ac = Wi-Fi 5, ax = Wi-Fi 6). |
+| **IMAP** | Protocolo de recepción de correo que mantiene los mensajes en el servidor, sincronizados entre dispositivos; puerto 143. |
+| **ipconfig** | Comando de Windows que muestra la configuración IP del equipo; `/all` amplía la información. |
 | **IPv6** | Versión del protocolo IP con direcciones de 128 bits en hexadecimal; sucesora de IPv4. |
 | **Lease (préstamo DHCP)** | Tiempo durante el cual el cliente puede usar la IP asignada antes de renovarla. |
 | **Loopback** | Dirección 127.0.0.1, prueba interna de la pila TCP/IP del propio equipo. |
@@ -583,16 +766,31 @@ Se añadirán a este manual a medida que avance el curso:
 | **Modelo TCP/IP** | Modelo práctico de 4 capas: acceso a la red, internet, transporte, aplicación. |
 | **Multicast** | Transmisión a un grupo de hosts suscritos; rango IPv4 224.0.0.0-239.255.255.255. |
 | **NAT** | Traducción de direcciones: permite que IPs privadas salgan a internet con una IP pública. |
+| **netstat** | Comando que lista las conexiones activas y los puertos abiertos del equipo. |
+| **nslookup** | Comando que consulta el DNS para comprobar qué IP devuelve un nombre de dominio. |
 | **P2P (peer-to-peer)** | Red sin servidor dedicado donde cada equipo puede ser cliente y servidor; no escala bien. |
 | **PAT (NAT con sobrecarga)** | Variante de NAT que usa los puertos para que muchos hosts compartan una sola IP pública. |
+| **ping** | Comando que comprueba la conectividad con un destino mediante mensajes ICMP y mide el tiempo de respuesta. |
+| **POP3** | Protocolo de recepción de correo que descarga los mensajes al equipo; puerto 110. |
 | **Powerline** | Tecnología que transmite la red por la instalación eléctrica de la vivienda. |
+| **Puerto** | Número que identifica a una aplicación dentro de un host; los bien conocidos van del 0 al 1023. |
 | **RFC 1918** | Documento que define los tres rangos de direcciones IPv4 privadas. |
+| **Ruta por defecto** | Entrada 0.0.0.0/0 de la tabla de enrutamiento: destino de los paquetes cuya red no figura en la tabla. |
+| **Saludo de tres vías** | Apertura de una conexión TCP: SYN, SYN-ACK, ACK. |
+| **SMTP** | Protocolo de envío de correo entre cliente y servidor y entre servidores; puerto 25. |
+| **Socket** | Combinación de dirección IP y puerto que identifica un extremo de una conexión. |
+| **SSH** | Acceso remoto cifrado por línea de comandos; puerto 22. Sustituye a Telnet. |
 | **SSID** | Nombre que identifica una red inalámbrica. |
 | **Switch** | Dispositivo de capa 2 que aprende MACs y entrega cada trama solo por el puerto del destinatario. |
 | **Tabla de direcciones MAC** | Tabla del switch que asocia cada MAC aprendida con el puerto donde se encuentra. |
+| **Tabla de enrutamiento** | Tabla del router con las redes que conoce (conectadas, estáticas y dinámicas) y por dónde alcanzarlas. |
+| **TCP** | Protocolo de transporte fiable y orientado a conexión; garantiza entrega y orden. |
+| **Telnet** | Acceso remoto por línea de comandos sin cifrar; obsoleto, puerto 23. |
 | **Throughput** | Caudal real de datos transmitidos; siempre menor o igual que el ancho de banda. |
+| **tracert / traceroute** | Comando que muestra los routers del camino hasta un destino y dónde se pierde el tráfico. |
 | **Trama (frame)** | Unidad de datos de capa 2; en Ethernet incluye MACs de origen y destino y FCS. |
 | **Tunneling** | Técnica de coexistencia que transporta paquetes IPv6 dentro de paquetes IPv4. |
+| **UDP** | Protocolo de transporte sin conexión, rápido y sin garantías; para voz, vídeo, DNS y DHCP. |
 | **Unicast** | Transmisión de un emisor a un único destinatario. |
 | **UTP (par trenzado)** | Cable de cobre más común en LANs; categorías 5e/6/6a, máximo 100 m por tramo. |
 | **WPA2 / WPA3** | Protocolos actuales de seguridad Wi-Fi; WEP y las redes abiertas son inseguras. |
