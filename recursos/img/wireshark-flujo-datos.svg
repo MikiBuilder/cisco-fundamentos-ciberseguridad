@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="300" viewBox="0 0 920 300" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="920" height="300" fill="#ffffff"/>
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#1a3550">Flujo de datos en Wireshark</text>
+
+  <!-- Red / cable -->
+  <rect x="20" y="110" width="110" height="80" rx="10" fill="#e8eef5" stroke="#8aa5bd" stroke-width="1.5"/>
+  <text x="75" y="143" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3550">Red</text>
+  <text x="75" y="163" text-anchor="middle" font-size="11" fill="#44617c">cable / aire</text>
+
+  <!-- flecha 1 -->
+  <line x1="130" y1="150" x2="168" y2="150" stroke="#44617c" stroke-width="2"/>
+  <polygon points="168,144 180,150 168,156" fill="#44617c"/>
+
+  <!-- Driver -->
+  <rect x="184" y="90" width="160" height="120" rx="10" fill="#dcebf7" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="264" y="118" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3550">1. Driver de enlace</text>
+  <text x="264" y="140" text-anchor="middle" font-size="11" fill="#2d4a66">libpcap / Npcap</text>
+  <text x="264" y="158" text-anchor="middle" font-size="11" fill="#2d4a66">pone la NIC en</text>
+  <text x="264" y="174" text-anchor="middle" font-size="11" font-weight="bold" fill="#2d4a66">modo promiscuo</text>
+  <text x="264" y="196" text-anchor="middle" font-size="10" fill="#6a84a0">captura en bruto</text>
+
+  <!-- flecha 2 -->
+  <line x1="344" y1="150" x2="382" y2="150" stroke="#44617c" stroke-width="2"/>
+  <polygon points="382,144 394,150 382,156" fill="#44617c"/>
+
+  <!-- Motor de captura -->
+  <rect x="398" y="90" width="160" height="120" rx="10" fill="#dcebf7" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="478" y="118" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3550">2. Motor de captura</text>
+  <text x="478" y="140" text-anchor="middle" font-size="11" fill="#2d4a66">almacena temporalmente</text>
+  <text x="478" y="158" text-anchor="middle" font-size="11" fill="#2d4a66">y evita perder paquetes</text>
+  <text x="478" y="176" text-anchor="middle" font-size="11" fill="#2d4a66">a alta velocidad</text>
+  <text x="478" y="196" text-anchor="middle" font-size="10" fill="#6a84a0">aquí actúan los filtros BPF</text>
+
+  <!-- flecha 3 -->
+  <line x1="558" y1="150" x2="596" y2="150" stroke="#44617c" stroke-width="2"/>
+  <polygon points="596,144 608,150 596,156" fill="#44617c"/>
+
+  <!-- Motor de nucleo -->
+  <rect x="612" y="90" width="160" height="120" rx="10" fill="#dcebf7" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="692" y="118" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3550">3. Motor de núcleo</text>
+  <text x="692" y="140" text-anchor="middle" font-size="11" font-weight="bold" fill="#2d4a66">disectores (+1100)</text>
+  <text x="692" y="158" text-anchor="middle" font-size="11" fill="#2d4a66">traduce bytes a campos:</text>
+  <text x="692" y="176" text-anchor="middle" font-size="11" fill="#2d4a66">HTTP, TCP, DNS...</text>
+  <text x="692" y="196" text-anchor="middle" font-size="10" fill="#6a84a0">decodificación</text>
+
+  <!-- flecha 4 (hacia abajo-derecha) -->
+  <line x1="772" y1="150" x2="810" y2="150" stroke="#44617c" stroke-width="2"/>
+  <polygon points="810,144 822,150 810,156" fill="#44617c"/>
+
+  <!-- GUI -->
+  <rect x="826" y="90" width="80" height="120" rx="10" fill="#d9f0e1" stroke="#4e9e6e" stroke-width="1.5"/>
+  <text x="866" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d5537">4. GUI</text>
+  <text x="866" y="144" text-anchor="middle" font-size="10" fill="#2d6647">paneles,</text>
+  <text x="866" y="160" text-anchor="middle" font-size="10" fill="#2d6647">filtros de</text>
+  <text x="866" y="176" text-anchor="middle" font-size="10" fill="#2d6647">visualización,</text>
+  <text x="866" y="192" text-anchor="middle" font-size="10" fill="#2d6647">colores</text>
+
+  <!-- pie -->
+  <text x="460" y="262" text-anchor="middle" font-size="12" fill="#44617c">Wireshark solo mide: no envía paquetes ni actúa sobre la red (salvo la resolución de nombres, desactivable).</text>
+</svg>

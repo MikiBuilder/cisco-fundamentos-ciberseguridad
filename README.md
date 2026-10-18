@@ -8,7 +8,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 
 ## Cursos
 
-### CCST IT Support
+### CCST IT Support *(202609_Sup_G6)*
 
 | Módulo | Curso | Estado | Apuntes |
 |--------|-------|--------|---------|
@@ -22,7 +22,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 | Módulo | Curso | Estado | Apuntes |
 |--------|-------|--------|---------|
 | 1 | Networking Basics | Completo | [Ver resumen](cursos/ccst-networking/networking-basics.md) |
-| 2 | Networking Devices and Initial Configuration | Pendiente | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md)  |
+| 2 | Networking Devices and Initial Configuration | En progreso | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md) |
 | 3 | Network Addressing and Basic Troubleshooting | Pendiente | — |
 | 4 | Network Support and Security | Pendiente | — |
 
@@ -32,6 +32,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 |---------|-------------|
 | [Comandos Linux (EN-ES)](recursos/linux-commands-reference.md) | Referencia rápida: archivos, permisos, procesos, redes, SSH, seguridad y paquetes |
 | [Packet Tracer y redes básicas](recursos/packet-tracer-redes-basicas.md) | Direccionamiento IP, gateway, ICMP/ARP y práctica de enrutamiento entre dos subredes (incluye .pkt) |
+| [Wireshark: análisis de tráfico](recursos/wireshark-analisis-de-trafico.md) | Resumen de la cápsula bootcamp: captura, filtros BPF y de visualización, streams, latencia, extracción de ficheros, DDoS y malware |
 
 ## Estructura del repositorio
 
@@ -44,10 +45,13 @@ cisco-fundamentos-ciberseguridad/
 │   │   ├── operating-systems-support.md
 │   │   ├── security-and-connectivity-support.md
 │   │   └── hardware-and-upgrade-support.md
-│   └── ccst-networking/               en curso
+│   └── ccst-networking/
+│       ├── networking-basics.md
+│       └── networking-devices-and-initial-configuration.md
 ├── recursos/                          material transversal
 │   ├── linux-commands-reference.md
 │   ├── packet-tracer-redes-basicas.md
+│   ├── wireshark-analisis-de-trafico.md
 │   ├── img/                           imágenes de los recursos
 │   └── archivos/                      archivos de práctica (.pkt, etc.)
 └── plantilla/
@@ -56,7 +60,7 @@ cisco-fundamentos-ciberseguridad/
 
 ## Cómo añadir un nuevo módulo o curso
 
-1. Copia `plantilla/plantilla-curso.md` en la carpeta de la certificación correspondiente (ej.: `cursos/ccst-networking/networking-basics.md`), con nombre en minúsculas y con guiones.
+1. Copia `plantilla/plantilla-curso.md` en la carpeta de la certificación correspondiente (ej.: `cursos/ccst-networking/networking-devices-and-initial-configuration.md`), con nombre en minúsculas y con guiones.
 2. Rellena las secciones siguiendo la misma estructura: resúmenes, palabras clave, apartados de examen y glosario.
 3. Añade o actualiza la fila correspondiente en la tabla de cursos de este README.
 4. Haz commit con un mensaje claro: `Añade resumen de <nombre del módulo>`.
