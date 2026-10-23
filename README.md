@@ -17,6 +17,8 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 | 3 | Security and Connectivity Support | Completo | [Ver resumen](cursos/ccst-it-support/security-and-connectivity-support.md) |
 | 4 | Hardware and Upgrade Support | Completo | [Ver resumen](cursos/ccst-it-support/hardware-and-upgrade-support.md) |
 
+**Test de repaso:** [abrir el simulador de examen](https://mikibuilder.github.io/cisco-fundamentos-ciberseguridad/cursos/ccst-it-support/test-ccst-it-support.html) — 266 preguntas organizadas por los 6 dominios del CCST IT Support, con corrección automática, explicaciones y desglose por dominio. Funciona desde el móvil. ([código fuente](cursos/ccst-it-support/test-ccst-it-support.html))
+
 ### CCST Networking
 
 | Módulo | Curso | Estado | Apuntes |
@@ -44,7 +46,8 @@ cisco-fundamentos-ciberseguridad/
 │   │   ├── it-customer-support-basics.md
 │   │   ├── operating-systems-support.md
 │   │   ├── security-and-connectivity-support.md
-│   │   └── hardware-and-upgrade-support.md
+│   │   ├── hardware-and-upgrade-support.md
+│   │   └── test-ccst-it-support.html
 │   └── ccst-networking/
 │       ├── networking-basics.md
 │       └── networking-devices-and-initial-configuration.md
