@@ -24,7 +24,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 | Módulo | Curso | Estado | Apuntes |
 |--------|-------|--------|---------|
 | 1 | Networking Basics | Completo | [Ver resumen](cursos/ccst-networking/networking-basics.md) |
-| 2 | Networking Devices and Initial Configuration | En progreso | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md) |
+| 2 | Networking Devices and Initial Configuration | Completo | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md) |
 | 3 | Network Addressing and Basic Troubleshooting | Pendiente | — |
 | 4 | Network Support and Security | Pendiente | — |
 
@@ -32,10 +32,10 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 
 | Recurso | Descripción |
 |---------|-------------|
-| [Comandos Linux (EN-ES)](recursos/linux-commands-reference.md) | Referencia rápida: archivos, permisos, procesos, redes, SSH, seguridad y paquetes |
+| [Comandos Cisco IOS y Packet Tracer](recursos/comandos-cisco-ios-packet-tracer.md) | Referencia de la CLI: modos, configuración de switch y router, VLANs, enrutamiento, DHCP, NAT, SSH, ACLs y comandos show |
 | [Packet Tracer y redes básicas](recursos/packet-tracer-redes-basicas.md) | Direccionamiento IP, gateway, ICMP/ARP y práctica de enrutamiento entre dos subredes (incluye .pkt) |
 | [Wireshark: análisis de tráfico](recursos/wireshark-analisis-de-trafico.md) | Resumen de la cápsula bootcamp: captura, filtros BPF y de visualización, streams, latencia, extracción de ficheros, DDoS y malware |
-
+| [Comandos Linux (EN-ES)](recursos/linux-commands-reference.md) | Referencia rápida: archivos, permisos, procesos, redes, SSH, seguridad y paquetes |
 ## Estructura del repositorio
 
 ```
