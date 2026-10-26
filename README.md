@@ -52,6 +52,7 @@ cisco-fundamentos-ciberseguridad/
 │       ├── networking-basics.md
 │       └── networking-devices-and-initial-configuration.md
 ├── recursos/                          material transversal
+│   ├── comandos-cisco-ios-packet-tracer.md
 │   ├── linux-commands-reference.md
 │   ├── packet-tracer-redes-basicas.md
 │   ├── wireshark-analisis-de-trafico.md
