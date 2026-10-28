@@ -25,7 +25,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 |--------|-------|--------|---------|
 | 1 | Networking Basics | Completo | [Ver resumen](cursos/ccst-networking/networking-basics.md) |
 | 2 | Networking Devices and Initial Configuration | Completo | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md) |
-| 3 | Network Addressing and Basic Troubleshooting | Pendiente | — |
+| 3 | Network Addressing and Basic Troubleshooting | En progreso | [Ver resumen](cursos/ccst-networking/network-addressing-and-basic-troubleshooting.md) |
 | 4 | Network Support and Security | Pendiente | — |
 
 ## Recursos
@@ -33,9 +33,10 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 | Recurso | Descripción |
 |---------|-------------|
 | [Comandos Cisco IOS y Packet Tracer](recursos/comandos-cisco-ios-packet-tracer.md) | Referencia de la CLI: modos, configuración de switch y router, VLANs, enrutamiento, DHCP, NAT, SSH, ACLs y comandos show |
+| [Comandos Linux (EN-ES)](recursos/linux-commands-reference.md) | Referencia rápida: archivos, permisos, procesos, redes, SSH, seguridad y paquetes |
 | [Packet Tracer y redes básicas](recursos/packet-tracer-redes-basicas.md) | Direccionamiento IP, gateway, ICMP/ARP y práctica de enrutamiento entre dos subredes (incluye .pkt) |
 | [Wireshark: análisis de tráfico](recursos/wireshark-analisis-de-trafico.md) | Resumen de la cápsula bootcamp: captura, filtros BPF y de visualización, streams, latencia, extracción de ficheros, DDoS y malware |
-| [Comandos Linux (EN-ES)](recursos/linux-commands-reference.md) | Referencia rápida: archivos, permisos, procesos, redes, SSH, seguridad y paquetes |
+
 ## Estructura del repositorio
 
 ```
@@ -50,7 +51,8 @@ cisco-fundamentos-ciberseguridad/
 │   │   └── test-ccst-it-support.html
 │   └── ccst-networking/
 │       ├── networking-basics.md
-│       └── networking-devices-and-initial-configuration.md
+│       ├── networking-devices-and-initial-configuration.md
+│       └── network-addressing-and-basic-troubleshooting.md
 ├── recursos/                          material transversal
 │   ├── comandos-cisco-ios-packet-tracer.md
 │   ├── linux-commands-reference.md
