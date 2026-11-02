@@ -25,7 +25,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 |--------|-------|--------|---------|
 | 1 | Networking Basics | Completo | [Ver resumen](cursos/ccst-networking/networking-basics.md) |
 | 2 | Networking Devices and Initial Configuration | Completo | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md) |
-| 3 | Network Addressing and Basic Troubleshooting | En progreso | [Ver resumen](cursos/ccst-networking/network-addressing-and-basic-troubleshooting.md) |
+| 3 | Network Addressing and Basic Troubleshooting | Completo | [Ver resumen](cursos/ccst-networking/network-addressing-and-basic-troubleshooting.md) |
 | 4 | Network Support and Security | Pendiente | — |
 
 ## Recursos

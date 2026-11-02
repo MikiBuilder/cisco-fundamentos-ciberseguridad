@@ -1,10 +1,10 @@
 [← Volver a la página principal del repositorio](../../README.md)
 
-# Network Addressing and Basic Troubleshooting
+# Manual de Estudio — Network Addressing and Basic Troubleshooting
 
 > **Objetivo del curso:** examinar a fondo la capa física, las topologías de la capa de enlace y el enrutamiento básico en la capa de red; dominar el direccionamiento IPv6 estático y dinámico y Neighbor Discovery; conocer el funcionamiento interno de switches y routers Cisco, y aprender a diagnosticar los problemas de red más comunes. Tercer curso de la serie CCST Networking, continuación de [Networking Devices and Initial Configuration](networking-devices-and-initial-configuration.md).
 
-**Estado de estos apuntes:** curso en progreso. Cubren los módulos 1 a 5 y los 2 primeros checkpoint exams; faltan los módulos 6 y 7 (curso de 14 horas, 8 labs).
+**Estado de estos apuntes:** curso completo. Cubren los 7 módulos, los 3 checkpoint exams y el examen final (14 horas, 8 labs).
 
 ---
 
@@ -18,7 +18,10 @@
 - [Módulo 4 — IPv6 Addressing](#módulo-4--ipv6-addressing)
 - [Módulo 5 — IPv6 Neighbor Discovery](#módulo-5--ipv6-neighbor-discovery)
 - [Checkpoint Exam: módulos 4 y 5](#checkpoint-exam-módulos-4-y-5)
-- [Próximos módulos (pendientes de cursar)](#próximos-módulos-pendientes-de-cursar)
+- [Módulo 6 — Cisco Switches and Routers](#módulo-6--cisco-switches-and-routers)
+- [Módulo 7 — Troubleshoot Common Network Problems](#módulo-7--troubleshoot-common-network-problems)
+- [Checkpoint Exam: módulos 6 y 7](#checkpoint-exam-módulos-6-y-7)
+- [Examen final del curso](#examen-final-del-curso)
 - [Anexo: palabras clave por módulo](#anexo-palabras-clave-por-módulo)
 - [Glosario de términos](#glosario-de-términos)
 
@@ -323,16 +326,176 @@ Segundo examen parcial del curso: evalúa el direccionamiento IPv6 (tipos, confi
 
 ---
 
-# Próximos módulos (pendientes de cursar)
+# MÓDULO 6 — Cisco Switches and Routers
 
-Se añadirán a este manual a medida que avance el curso:
+**(Switches y routers Cisco por dentro)**
 
-| Módulo | Título |
-|---|---|
-| 6 | Cisco Switches and Routers (conmutación, arranque de switch y router) |
-| 7 | Troubleshoot Common Network Problems (proceso de troubleshooting, capa física, Wi-Fi, internet y soporte) |
-| — | Checkpoint Exam: módulos 6 y 7 |
-| — | Course Final Exam |
+## 6.1 Cisco Switches (Switches Cisco)
+
+- Formatos de switch:
+  - **Configuración fija:** puertos cerrados de fábrica; el habitual en acceso.
+  - **Modular:** chasis con ranuras para tarjetas de línea; crece según necesidad.
+  - **Apilable (stackable):** varios switches unidos por cable de stack operan como uno solo.
+- Criterios de elección: densidad de puertos, velocidad de reenvío (forwarding rate), soporte **PoE** (alimentar APs y teléfonos IP por el propio cable de red).
+- **LEDs del panel frontal**, con el botón Mode para alternar vistas:
+
+| LED | Verde | Ámbar |
+|---|---|---|
+| **SYST** | Sistema operativo cargado y funcionando | Fallo en el arranque: POST con errores |
+| **STAT** | Puerto con enlace activo (parpadea con tráfico) | Puerto bloqueado o con error |
+| **DUPLX** | Puerto en full duplex | Apagado = half duplex |
+| **SPEED** | Indica la velocidad del puerto según el patrón | — |
+| **RPS** | Fuente de alimentación redundante lista | Problema en la fuente redundante |
+
+## 6.2 Switch Speeds and Forwarding Methods (Velocidades y métodos de reenvío)
+
+- Dos métodos de reenvío de tramas:
+
+| Método | Cómo trabaja | Pros y contras |
+|---|---|---|
+| **Store-and-forward** | Recibe la trama completa y comprueba el FCS antes de reenviar | Descarta tramas con error; necesario para QoS. Algo más de latencia |
+| **Cut-through** | Reenvía en cuanto lee la MAC de destino | Latencia mínima, pero propaga tramas con error |
+
+- **Fragment-free** es la variante intermedia de cut-through: espera los primeros 64 bytes (la ventana de colisión) para no reenviar fragmentos.
+- Ajustes de puerto: velocidad y duplex por **autonegociación** (lo recomendable en ambos extremos). Configurar un extremo fijo y el otro en auto provoca **duplex mismatch**: la red va, pero lenta y con errores.
+- **Auto-MDIX:** el puerto detecta el tipo de cable (directo o cruzado) y se adapta; por eso los cables cruzados casi han desaparecido.
+
+## 6.3 Switch Boot Process (Arranque del switch)
+
+1. Se ejecuta el **POST** desde la ROM: comprueba CPU, DRAM y flash.
+2. Arranca el **boot loader**.
+3. Se inicializan los registros de la CPU.
+4. Se inicializa el sistema de archivos de la **flash**.
+5. El boot loader localiza la imagen **IOS** en la flash y la carga en RAM (la variable de entorno BOOT puede fijar cuál, con `boot system`).
+6. IOS carga la **startup-config** desde la NVRAM.
+
+- Si el IOS no aparece, el equipo queda en el prompt del boot loader (`switch:`), desde donde se puede recuperar.
+- El switch conmuta sin necesitar IP; la SVI con dirección solo hace falta para administrarlo en remoto.
+
+## 6.4 Cisco Routers (Routers Cisco)
+
+- Un router es un ordenador especializado. Sus memorias, pregunta clásica de examen:
+
+| Memoria | Contenido | ¿Volátil? |
+|---|---|---|
+| **RAM** | Running-config, tabla de enrutamiento, caché ARP | Sí: se pierde al apagar |
+| **ROM** | Bootstrap, POST y un IOS mínimo de emergencia | No |
+| **NVRAM** | Startup-config | No |
+| **Flash** | Imagen completa del IOS | No |
+
+- Puertos y conexiones: consola (gestión local), interfaces LAN (GigabitEthernet), interfaces WAN y puerto de gestión.
+- Los routers de pequeña empresa integran en una caja router, switch, punto de acceso Wi-Fi y firewall básico.
+
+## 6.5 Router Boot Process (Arranque del router)
+
+1. **POST** y carga del **bootstrap** desde la ROM.
+2. Localizar el **IOS** (normalmente en flash; TFTP como alternativa) y cargarlo en RAM. Si no hay imagen, arranca el modo de recuperación ROMmon.
+3. Localizar la **startup-config** (NVRAM o TFTP) y cargarla. Si no existe, el router ofrece el **modo setup** (el diálogo "initial configuration dialog", que en la práctica se rechaza y se configura por CLI).
+
+- Verificación del arranque: `show version` muestra versión de IOS, tiempo encendido, memorias y el registro de configuración (0x2102 es el valor normal).
+
+### Para el examen
+- LED SYST en ámbar = fallo de arranque. Es el LED que más preguntan.
+- Store-and-forward comprueba FCS; cut-through gana en latencia pero propaga errores; fragment-free espera 64 bytes.
+- La tabla de memorias del router: qué vive en RAM, ROM, NVRAM y flash, y cuál se borra al apagar.
+- Orden de arranque: POST → bootstrap/boot loader → IOS (flash) → startup-config (NVRAM).
+- Sin startup-config aparece el modo setup; sin IOS, ROMmon (router) o `switch:` (switch).
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# MÓDULO 7 — Troubleshoot Common Network Problems
+
+**(Diagnóstico de los problemas de red más comunes)**
+
+## 7.1 The Troubleshooting Process (El proceso de troubleshooting)
+
+- Antes de tocar nada: recopilar información (síntomas exactos, cambios recientes, alcance: ¿le pasa a un usuario o a todos?) y consultar la documentación de la red.
+- Enfoques estructurados, elegir según el síntoma:
+
+| Enfoque | Cómo trabaja | Cuándo conviene |
+|---|---|---|
+| **Bottom-up** | Empieza por la capa física y sube | Sospecha de cables, enlaces, hardware |
+| **Top-down** | Empieza por la aplicación y baja | El fallo parece de software o de un servicio |
+| **Divide and conquer** | Empieza por una capa intermedia (un ping) y según el resultado sube o baja | Cuando no hay pista clara; el más usado |
+| **Follow-the-path** | Sigue el camino real del tráfico salto a salto | Localizar en qué punto se pierde |
+| **Sustitución** | Cambia el componente sospechoso por uno bueno | Rápido con repuestos a mano |
+- El flujo de trabajo completo con el cliente (definir, recopilar, probar, documentar) es el mismo proceso de 8 pasos del [manual de IT Support](../ccst-it-support/it-customer-support-basics.md).
+
+## 7.2 Physical Layer Problems (Problemas de capa física)
+
+- Un porcentaje alto de averías es físico. Qué revisar primero:
+  - **LEDs de enlace:** sin luz de link no hay nada que diagnosticar por arriba.
+  - **Cables:** tipo equivocado, conectores mal crimpados o sueltos, longitud por encima de 100 m, cable dañado o pellizcado.
+  - **Duplex mismatch:** red lenta y con errores tras tocar la configuración de un puerto.
+  - **EMI:** cables de datos pegados a motores, fluorescentes o cuadros eléctricos.
+- Herramientas: probador de cables, multímetro, y el método de siempre: sustituir por un cable bueno conocido.
+
+## 7.3 Troubleshoot Wireless Issues (Problemas de red inalámbrica)
+
+- Causas habituales de una Wi-Fi que falla o va lenta:
+  - **Señal débil:** distancia, muros, plantas del edificio. Se soluciona reubicando el AP o añadiendo otro.
+  - **Interferencias:** microondas, teléfonos inalámbricos, otros APs vecinos.
+  - **Canal saturado o solapado:** en 2,4 GHz usar solo 1, 6 u 11.
+  - **Errores de configuración:** SSID mal escrito, contraseña incorrecta, estándar o banda incompatibles con el dispositivo.
+  - **Firmware del AP o drivers del adaptador** desactualizados.
+
+## 7.4 Common Internet Connectivity Issues (Problemas de conexión a internet)
+
+- La escalera de pings para acotar dónde se rompe la conexión:
+
+```
+ping 127.0.0.1      la pila TCP/IP del propio equipo
+ping [IP propia]    la NIC
+ping [gateway]      la red local
+ping 8.8.8.8        la salida a internet
+ping dominio.com    el DNS
+```
+
+- Diagnósticos frecuentes:
+  - **IP 169.254.x.x (APIPA):** el cliente no alcanzó al servidor DHCP. Revisar el servidor y renovar con `ipconfig /release` y `ipconfig /renew`.
+  - **Ping a IP funciona pero a dominios no:** problema de DNS. Comprobar con `nslookup`, limpiar caché con `ipconfig /flushdns`, revisar el DNS configurado.
+  - **Sin respuesta del gateway:** problema en la red local o en el router.
+  - **Todo lo local bien y sin internet:** revisar módem/ONT (luces) y llamar al ISP.
+  - Un firewall puede bloquear el ping sin que la conexión esté rota: no es prueba definitiva.
+
+## 7.5 Customer Support (Soporte al cliente)
+
+- Con el usuario: escuchar sin interrumpir, hacer preguntas abiertas para entender y cerradas para concretar, reproducir el problema y no culpar.
+- Documentarlo todo en el **ticket**: síntomas, pasos probados, solución; el siguiente técnico lo agradece y el historial alimenta la base de conocimiento.
+- Fuentes externas cuando el problema se resiste: documentación y web del fabricante, bases de conocimiento, FAQs, foros técnicos y búsqueda en internet.
+- **Escalar** al siguiente nivel cuando el problema excede los conocimientos o permisos propios, explicando al cliente qué pasará después. Al cerrar: confirmar con el usuario que todo funciona y dejar la solución documentada.
+
+### Para el examen
+- Asociar cada enfoque (bottom-up, top-down, divide and conquer, sustitución) con su escenario.
+- La escalera de pings en orden: loopback → IP propia → gateway → IP externa → dominio.
+- 169.254.x.x = DHCP inaccesible. IP funciona y dominio no = DNS.
+- `ipconfig /release`, `/renew`, `/flushdns` y `nslookup`: qué resuelve cada uno.
+- En 2,4 GHz, canales 1, 6 y 11.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# Checkpoint Exam: módulos 6 y 7
+
+Tercer examen parcial del curso: evalúa el hardware y arranque de switches y routers Cisco, los métodos de reenvío y el diagnóstico de problemas comunes de red.
+
+[⬆ Volver al índice](#índice)
+
+---
+
+# Examen final del curso
+
+El examen final cubre los 7 módulos. Recomendaciones de repaso:
+
+1. Vuelve a los apartados "Para el examen" de cada módulo.
+2. De memoria: los límites del cableado (100 m UTP, 550 m multimodo), los rangos IPv6 (2000::/3, fe80::/10, fc00::/7, ff02::1, ff02::2, ::1), los flags A/O/M, los códigos de `show ip route` y la tabla de memorias RAM/ROM/NVRAM/flash.
+3. Practica la compresión de direcciones IPv6 y el método EUI-64 con ejemplos propios hasta que salgan sin pensar.
+4. Repasa la escalera de pings y los enfoques de troubleshooting con escenarios: el examen plantea casos del tipo "¿qué harías primero?".
+
+Superado este curso, el siguiente y último de la serie CCST Networking es **Network Support and Security**.
 
 [⬆ Volver al índice](#índice)
 
@@ -350,6 +513,10 @@ Se añadirán a este manual a medida que avance el curso:
 
 **Módulo 5:** *Neighbor Discovery (ND) · ICMPv6 · Router Solicitation · Router Advertisement · Neighbor Solicitation · Neighbor Advertisement · Redirect · address resolution · DAD (Duplicate Address Detection) · neighbor table · `show ipv6 neighbors` · solicited-node multicast*
 
+**Módulo 6:** *fixed/modular/stackable · port density · forwarding rate · PoE · status LEDs (SYST, RPS, STAT, DUPLX, SPEED) · Mode button · store-and-forward · cut-through · fragment-free · FCS check · latency · autonegotiation · duplex mismatch · auto-MDIX · POST · boot loader · bootstrap · ROMmon · setup mode · RAM · ROM · NVRAM · flash · running-config · startup-config · `show version` · configuration register (0x2102)*
+
+**Módulo 7:** *troubleshooting process · bottom-up · top-down · divide and conquer · follow-the-path · substitution · link lights · cable tester · duplex mismatch · EMI · wireless interference · channel overlap (1, 6, 11) · SSID · firmware · APIPA (169.254.x.x) · `ipconfig /release` · `ipconfig /renew` · `ipconfig /flushdns` · `nslookup` · ping ladder · default gateway · ISP · help desk · ticket · knowledge base · escalation*
+
 [⬆ Volver al índice](#índice)
 
 ---
@@ -360,21 +527,29 @@ Se añadirán a este manual a medida que avance el curso:
 |---|---|
 | **Ancho de banda** | Capacidad teórica de un medio, en bits por segundo; el techo, no lo que se consigue. |
 | **Atenuación** | Pérdida de fuerza de la señal con la distancia; la razón del límite de 100 m del UTP. |
+| **Auto-MDIX** | Función del puerto que detecta si el cable es directo o cruzado y se adapta sola. |
+| **Boot loader** | Programa que arranca el switch tras el POST y carga el IOS desde la flash; su prompt de recuperación es `switch:`. |
+| **Bottom-up** | Enfoque de troubleshooting que empieza por la capa física y va subiendo. |
 | **Cable crossover** | Cable UTP con T568A en un extremo y T568B en el otro; conecta dispositivos iguales. |
 | **Cable de consola (rollover)** | Cable con pineado invertido para conectar un PC al puerto de consola de un equipo Cisco. |
 | **Cable directo (straight-through)** | Cable UTP con el mismo pineado en ambos extremos; conecta dispositivos distintos (PC-switch). |
 | **Coaxial** | Cable de conductor central y malla; usado en antenas y en el módem de internet por cable. |
 | **CSMA/CA** | Acceso al medio de las WLAN: evita colisiones esperando turno y exigiendo confirmación. |
 | **CSMA/CD** | Acceso al medio de la Ethernet heredada half duplex: detecta colisiones y reintenta. |
+| **Cut-through** | Método de reenvío que envía la trama en cuanto lee la MAC de destino; mínima latencia, sin comprobar errores. |
 | **DAD** | Duplicate Address Detection: NS a la propia dirección para comprobar que nadie más la usa. |
 | **DHCPv6 con estado** | El servidor asigna dirección y configuración, como el DHCP de IPv4; flag M del RA. |
 | **DHCPv6 sin estado** | El host construye su dirección por SLAAC y el servidor solo aporta DNS y opciones; flag O. |
 | **Diafonía (crosstalk)** | Interferencia de un hilo sobre el vecino; se cancela trenzando los pares. |
 | **Distancia administrativa** | Confianza que merece la fuente de una ruta; a menor valor, más preferida. |
+| **Divide and conquer** | Enfoque de troubleshooting que empieza por una capa intermedia (un ping) y sube o baja según el resultado. |
+| **Duplex mismatch** | Un extremo del enlace en full duplex y el otro en half; la red funciona pero lenta y con errores. |
 | **EMI/RFI** | Interferencias electromagnéticas y de radio que degradan la señal en cobre; la fibra es inmune. |
 | **EUI-64** | Método que genera el ID de interfaz IPv6 desde la MAC: la parte en dos, inserta FFFE e invierte el séptimo bit. |
 | **Fibra monomodo** | Núcleo fino y láser; alcanza decenas de kilómetros. La de las largas distancias. |
 | **Fibra multimodo** | Núcleo grueso y LED; hasta unos 550 m. La habitual en backbones de edificio. |
+| **Flash** | Memoria no volátil donde vive la imagen del IOS (y `vlan.dat` en switches). |
+| **Fragment-free** | Variante de cut-through que espera los primeros 64 bytes para no reenviar fragmentos de colisión. |
 | **Gateway de último recurso** | La ruta por defecto del router: adonde va todo paquete sin ruta más específica. |
 | **Goodput** | Datos útiles por segundo: el throughput descontando las cabeceras de protocolo. |
 | **GUA (global unicast address)** | Dirección IPv6 pública y enrutable, del rango 2000::/3. |
@@ -383,21 +558,28 @@ Se añadirán a este manual a medida que avance el curso:
 | **LLA (link-local address)** | Dirección IPv6 obligatoria de cada interfaz, del rango fe80::/10; solo vale dentro del enlace. |
 | **Longest match** | Criterio de selección de rutas: gana la de prefijo más largo que coincida con el destino. |
 | **Malla (mesh)** | Topología con enlaces entre todos los nodos; máxima redundancia, máximo coste. |
+| **Modo setup** | Diálogo de configuración inicial que ofrece un router sin startup-config; en la práctica se rechaza y se usa la CLI. |
 | **Multicast de nodo solicitado** | Dirección ff02::1:ff + últimos 24 bits de la unicast; la usa ND para resolver direcciones sin molestar a toda la red. |
 | **Neighbor Advertisement (NA)** | Respuesta ND con la MAC solicitada; equivale al ARP reply. |
 | **Neighbor Discovery (ND)** | Protocolo de ICMPv6 que sustituye a ARP y gestiona el direccionamiento dinámico en IPv6. |
 | **Neighbor Solicitation (NS)** | Petición ND de la MAC de un vecino; equivale al ARP request. |
+| **NVRAM** | Memoria no volátil donde se guarda la startup-config; sobrevive a los reinicios. |
+| **POST** | Autodiagnóstico de arranque: comprueba CPU, memoria y flash antes de cargar nada. |
 | **Punto a punto** | Topología WAN de dos extremos unidos por un enlace permanente. |
+| **RAM** | Memoria de trabajo: running-config, tabla de enrutamiento y caché ARP. Se vacía al apagar. |
+| **ROM** | Memoria de solo lectura con el bootstrap, el POST y un IOS mínimo de emergencia. |
 | **Router Advertisement (RA)** | Anuncio del router con el prefijo de red, los flags A/O/M y su LLA como gateway. |
 | **Router Solicitation (RS)** | Petición del host para que los routers del enlace se anuncien; se envía a ff02::2. |
 | **Ruta estática** | Ruta configurada a mano por el administrador; código S en la tabla. |
 | **Ruta por defecto** | Ruta 0.0.0.0/0 (o ::/0) que captura el tráfico sin destino más específico. |
 | **SLAAC** | Stateless Address Autoconfiguration: el host se construye su GUA con el prefijo del RA, sin servidor. |
+| **Store-and-forward** | Método de reenvío que recibe la trama completa y comprueba el FCS antes de enviarla; el de los switches Cisco actuales. |
 | **STP (par trenzado blindado)** | UTP con apantallamiento extra contra EMI; más caro, para entornos ruidosos. |
 | **T568A / T568B** | Normas de orden de los hilos en el conector RJ-45. |
 | **Tabla de enrutamiento** | Lista de redes conocidas por un host o router con la forma de alcanzarlas. |
 | **Tabla de vecinos** | Caché IPv6-MAC que mantiene ND; la tabla ARP de IPv6. |
 | **Throughput** | Tasa de transferencia real conseguida, siempre por debajo del ancho de banda. |
+| **Top-down** | Enfoque de troubleshooting que empieza por la capa de aplicación y baja hacia la física. |
 | **Topología física** | Disposición real de equipos y cableado. |
 | **Topología lógica** | Cómo fluyen las tramas entre nodos, con independencia del cableado. |
 | **ULA (unique local address)** | Direcciones IPv6 privadas del rango fc00::/7, no enrutables por internet. |
