@@ -2,13 +2,13 @@
 
 Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos en el **Cibernàrium de Barcelona** (Barcelona Activa), orientados a la preparación de las certificaciones **CCST** (Cisco Certified Support Technician).
 
-> Material elaborado por y para la clase. Libre para consultar, compartir y mejorar.
+> Material libre para consultar, compartir y mejorar.
 
 ---
 
 ## Cursos
 
-### CCST IT Support *(202609_Sup_G6)*
+### CCST IT Support
 
 | Módulo | Curso | Estado | Apuntes |
 |--------|-------|--------|---------|
@@ -26,7 +26,16 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 | 1 | Networking Basics | Completo | [Ver resumen](cursos/ccst-networking/networking-basics.md) |
 | 2 | Networking Devices and Initial Configuration | Completo | [Ver resumen](cursos/ccst-networking/networking-devices-and-initial-configuration.md) |
 | 3 | Network Addressing and Basic Troubleshooting | Completo | [Ver resumen](cursos/ccst-networking/network-addressing-and-basic-troubleshooting.md) |
-| 4 | Network Support and Security | Pendiente | — |
+| 4 | Network Support and Security | Completo | [Ver resumen](cursos/ccst-networking/network-support-and-security.md) |
+
+**Test de repaso:** [abrir el simulador de examen](https://mikibuilder.github.io/cisco-fundamentos-ciberseguridad/cursos/ccst-networking/test-ccst-networking.html) — 309 preguntas organizadas por los 6 dominios del CCST Networking, con corrección automática, explicaciones y desglose por dominio. Funciona desde el móvil. ([código fuente](cursos/ccst-networking/test-ccst-networking.html))
+
+
+### CCST Cybersecurity
+
+| Módulo | Curso | Estado | Apuntes |
+|--------|-------|--------|---------|
+| 1 | Introduction to Cybersecurity | En progreso | — |
 
 ## Recursos
 
@@ -52,7 +61,9 @@ cisco-fundamentos-ciberseguridad/
 │   └── ccst-networking/
 │       ├── networking-basics.md
 │       ├── networking-devices-and-initial-configuration.md
-│       └── network-addressing-and-basic-troubleshooting.md
+│       ├── network-addressing-and-basic-troubleshooting.md
+│       ├── network-support-and-security.md
+│       └── test-ccst-networking.html
 ├── recursos/                          material transversal
 │   ├── comandos-cisco-ios-packet-tracer.md
 │   ├── linux-commands-reference.md
