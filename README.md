@@ -35,7 +35,7 @@ Resúmenes de estudio de los cursos de **Cisco Networking Academy** impartidos e
 
 | Módulo | Curso | Estado | Apuntes |
 |--------|-------|--------|---------|
-| 1 | Introduction to Cybersecurity | En progreso | — |
+| 1 | Introduction to Cybersecurity | Completo | [Ver resumen](cursos/ccst-cybersecurity/introduction-to-cybersecurity.md) |
 
 ## Recursos
 
@@ -58,12 +58,14 @@ cisco-fundamentos-ciberseguridad/
 │   │   ├── security-and-connectivity-support.md
 │   │   ├── hardware-and-upgrade-support.md
 │   │   └── test-ccst-it-support.html
-│   └── ccst-networking/
-│       ├── networking-basics.md
-│       ├── networking-devices-and-initial-configuration.md
-│       ├── network-addressing-and-basic-troubleshooting.md
-│       ├── network-support-and-security.md
-│       └── test-ccst-networking.html
+│   ├── ccst-networking/
+│   │   ├── networking-basics.md
+│   |   ├── networking-devices-and-initial-configuration.md
+│   |   ├── network-addressing-and-basic-troubleshooting.md
+│   |   ├── network-support-and-security.md
+│   |   └── test-ccst-networking.html
+│   └── ccst-cybersecurity/
+│       └── introduction-to-cybersecurity.md
 ├── recursos/                          material transversal
 │   ├── comandos-cisco-ios-packet-tracer.md
 │   ├── linux-commands-reference.md
